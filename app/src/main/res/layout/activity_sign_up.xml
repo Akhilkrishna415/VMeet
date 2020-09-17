@@ -172,7 +172,7 @@
 
             <Button
                 android:id="@+id/buttonRegister"
-                android:layout_width="180dp"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -181,17 +181,19 @@
                 android:text="Register"
                 android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/buttonExisting"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/mainText"
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
                 android:fontFamily="sans-serif"
-                android:text="Existing User?"
-                android:textColor="@color/white" />
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="Already had an account? Login Here"
+                android:textColor="@color/mainText"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
