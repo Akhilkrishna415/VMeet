@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
     android:orientation="vertical"
     tools:context=".SignUp">
 
@@ -43,9 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Email : "
+                android:text="Email: "
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -63,9 +63,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Password"
+                android:text="Password:"
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -83,9 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Phone Number :"
+                android:text="Phone Number:"
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -103,9 +105,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Staff ID :"
+                android:text="Staff ID:"
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -123,9 +126,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Department: "
+                android:text="Department:"
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -144,9 +148,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:padding="10dp"
-                android:text="Designation : "
+                android:text="Designation: "
+                android:textSize="18sp"
                 android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
@@ -167,7 +172,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@color/mainText"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:text="Register"
                 android:textColor="@color/white" />
 
@@ -179,7 +184,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@color/mainText"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="sans-serif"
                 android:text="Existing User?"
                 android:textColor="@color/white" />
         </LinearLayout>
