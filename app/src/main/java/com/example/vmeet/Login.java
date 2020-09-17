@@ -33,6 +33,15 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        goToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), SignUp.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 }
