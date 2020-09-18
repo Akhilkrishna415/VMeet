@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Faqs" />
+        <activity android:name=".Feedback" />
+        <activity android:name=".Contactus" />
+        <activity android:name=".Profile_settings" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Editprofile" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Login">
         <intent-filter>
@@ -22,7 +29,6 @@
             android:label="@string/title_activity_homepage"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUp" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -5,10 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
 
 
-<!--    <color name="mainText">#293e40</color>-->
+    <color name="mainText">#293e40</color>
     <color name="background">#81b5a1</color>
 
-    <color name="mainText">#008080</color>
+<!--    <color name="mainText">#008080</color>-->
     <color name="colortomato">#FF6347</color>
     <color name="colorgreen">#66cc00</color>
     <color name="tea1">#008080</color>
