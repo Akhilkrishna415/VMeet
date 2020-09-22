@@ -41,7 +41,14 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), ResetActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 }
