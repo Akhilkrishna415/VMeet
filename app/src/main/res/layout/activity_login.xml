@@ -7,13 +7,14 @@
     android:background="@color/white"
     tools:context=".Login">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
 
@@ -33,7 +34,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-condensed-light"
@@ -49,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:hint="@string/prompt_email"
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:hint="@string/prompt_password"
@@ -73,27 +74,12 @@
             android:selectAllOnFocus="true"
             android:textColorHint="@color/mainText" />
 
-<!--        <Button-->
-<!--            android:id="@+id/login"-->
-<!--            android:layout_width="134dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:background="@color/mainText"-->
-<!--            android:clickable="true"-->
-<!--            android:enabled="false"-->
-<!--            android:focusable="true"-->
-<!--            android:fontFamily="sans-serif"-->
-<!--            android:text="Login"-->
-<!--            android:textColor="@color/white_smoke"-->
-<!--            android:textStyle="bold" />-->
 
         <Button
             android:id="@+id/login"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/mainText"
             android:fontFamily="sans-serif"
@@ -127,4 +113,5 @@
             android:textSize="15sp"
             android:textStyle="normal" />
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
