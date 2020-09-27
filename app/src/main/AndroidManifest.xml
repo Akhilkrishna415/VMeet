@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".ResetActivity" />
         <activity android:name=".Faqs" />
         <activity android:name=".Feedback" />
@@ -18,7 +18,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".Editprofile" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Login">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
