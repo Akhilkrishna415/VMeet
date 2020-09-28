@@ -29,17 +29,17 @@
         android:layout_marginLeft="125dp"/>
 
     <LinearLayout
+        android:id="@+id/settingspane"
         android:layout_width="wrap_content"
-        android:layout_height="390dp"
+        android:layout_height="419dp"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="true"
-        android:id="@+id/settingspane"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="115dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="226dp"
+        android:layout_marginBottom="197dp"
         android:orientation="vertical">
 
 
@@ -148,7 +148,7 @@
             <TextView
                 android:id="@+id/contactus"
                 android:layout_width="287dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"

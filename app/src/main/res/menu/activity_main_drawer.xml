@@ -22,7 +22,10 @@
             android:title="Request Service" />
         <item android:title="More">
             <menu>
-                <item android:id="@+id/menu2settings" android:icon="@drawable/settings" android:title="Settings"/>
+                <item
+                    android:id="@+id/menu2settings"
+                    android:icon="@drawable/settings"
+                    android:title="Settings"/>
                 <item android:id="@+id/menu2feedback" android:icon="@drawable/feedback" android:title="Share Feedback"/>
                 <item android:id="@+id/menu2help" android:icon="@drawable/help" android:title="Need Assistance?"/>
             </menu>
