@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "9892760967",
+    "firebase_url": "https://vmeet-2fd0d.firebaseio.com",
+    "project_id": "vmeet-2fd0d",
+    "storage_bucket": "vmeet-2fd0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9892760967:android:b93bb8cd2c033d1ca65722",
+        "android_client_info": {
+          "package_name": "com.example.vmeet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9892760967-ksa0ajocu0hs4f49l2iv4em8nu00rbce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmj5L_qpsKDoQQ1QnkaTivUqbsAbkBAxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9892760967-ksa0ajocu0hs4f49l2iv4em8nu00rbce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
