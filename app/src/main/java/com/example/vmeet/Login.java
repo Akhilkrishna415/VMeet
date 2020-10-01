@@ -80,5 +80,13 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ResetActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
 }
