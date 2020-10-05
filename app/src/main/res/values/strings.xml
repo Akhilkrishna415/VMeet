@@ -21,4 +21,15 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string-array name="eventsp">
+        <item>Exam</item>
+        <item>Meeting</item>
+        <item>Conference</item>
+        <item>CulturalEvents</item>
+        <item>Other</item>
+
+
+
+
+    </string-array>
 </resources>
