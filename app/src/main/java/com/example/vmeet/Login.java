@@ -22,6 +22,8 @@ public class Login extends AppCompatActivity {
     TextView goToRegister, forgotPassword;
     EditText email,password;
     private FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,24 @@ public class Login extends AppCompatActivity {
         goToRegister = findViewById(R.id.gotoRegister);
         forgotPassword = findViewById(R.id.ForgetPass);
         mAuth = FirebaseAuth.getInstance();
+
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+                if (mFirebaseUser != null) {
+                    Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(Login.this, Homepage.class);
+                    startActivity(i);
+                }
+                else {
+                    Toast.makeText(Login.this, "Please Login", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
