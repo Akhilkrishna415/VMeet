@@ -77,6 +77,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
+    
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setCheckable(true);
         int id = item.getItemId();
@@ -87,6 +88,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         else if(id==R.id.menu3logout) {
             startActivity(new Intent(Homepage.this,Login.class));
+        }else if(id == R.id.nav_roombooking){
+            startActivity(new Intent(Homepage.this,RemoveHardewareSoftware.class));
         }
         return false;
     }
