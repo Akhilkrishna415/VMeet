@@ -21,15 +21,20 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="select_hardware_software">Select Hardware/ Software</string>
+    <string name="heading_rem_swHw">List of Software &amp; Hardware</string>
+    <string name="admin_dash_addhwsw">Add Hardware &amp; \n Software></string>
+    <string name="admin_remove_hwsw">Remove Hardware &amp; \n Software></string>
+    <string-array name="adminHardwareSoftware">
+        <item>Select..</item>
+        <item>Hardware</item>
+        <item>Software</item>
+    </string-array>
     <string-array name="eventsp">
         <item>Exam</item>
         <item>Meeting</item>
         <item>Conference</item>
         <item>CulturalEvents</item>
         <item>Other</item>
-
-
-
-
     </string-array>
 </resources>
