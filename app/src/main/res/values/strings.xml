@@ -21,6 +21,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="issue_desc">Please describe your issue..</string>
     <string name="select_hardware_software">Select Hardware/ Software</string>
     <string name="heading_rem_swHw">List of Software &amp; Hardware</string>
     <string name="admin_dash_addhwsw">Add Hardware &amp; \n Software></string>
@@ -36,5 +37,11 @@
         <item>Conference</item>
         <item>CulturalEvents</item>
         <item>Other</item>
+    </string-array>
+    <string-array name="spinnerReqType">
+        <item>Select</item>
+        <item>Hardware</item>
+        <item>Software</item>
+        <item>Room Maintenance</item>
     </string-array>
 </resources>
