@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
     public static final String TAG = "TAG";
     TextView goToRegister, forgotPassword;
     EditText email,password;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -109,4 +109,11 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+
 }
