@@ -20,8 +20,11 @@
         <activity android:name=".Faqs" />
         <activity android:name=".Feedback" />
         <activity android:name=".Contactus" />
-        <activity android:name=".Profile_settings" />
-        <activity android:name=".Settings" />
+        <activity android:name=".Profile_settings"
+            android:parentActivityName=".Settings"/>
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".Homepage" />
         <activity android:name=".Editprofile" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">

@@ -1,10 +1,13 @@
 package com.example.vmeet;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -12,13 +15,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class Profile_settings extends AppCompatActivity {
     Button btn_editprofile;
@@ -26,14 +36,15 @@ public class Profile_settings extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
-//    int TAKE_IMAGE_CODE=10001;
-//    ImageView profileImageView;
+    ImageView profileimage;
+    StorageReference storageReference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
-
 
         btn_editprofile= findViewById(R.id.edit_profile);
         email=findViewById(R.id.Profile_email);
@@ -41,9 +52,21 @@ public class Profile_settings extends AppCompatActivity {
         staffid=findViewById(R.id.Profile_id);
         dept=findViewById(R.id.Profile_department);
         designation=findViewById(R.id.Profile_designation);
+        profileimage=findViewById(R.id.profileimageView);
+
 
         fAuth=FirebaseAuth.getInstance();
         fStore=FirebaseFirestore.getInstance();
+        storageReference= FirebaseStorage.getInstance().getReference();
+
+        StorageReference profileRef=storageReference.child("Users/"+fAuth.getCurrentUser().getUid()+"profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileimage);
+            }
+        });
+
 
         userId=fAuth.getCurrentUser().getUid();
 
@@ -78,28 +101,7 @@ public class Profile_settings extends AppCompatActivity {
             }
         });
 
-
     }
 
-//    public void handleimageclick(View view) {
-//
-//        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if(intent.resolveActivity(getPackageManager())!=null){
-//            startActivityForResult(intent,TAKE_IMAGE_CODE);
-//        }
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode==TAKE_IMAGE_CODE){
-//            switch(resultCode){
-//                case RESULT_OK:
-//                    Bitmap bitmap=(Bitmap) data.getExtras().get("data");
-//                    profileImageView.setImageBitmap(bitmap);
-//
-//
-//            }
-//        }
-//    }
+
 }

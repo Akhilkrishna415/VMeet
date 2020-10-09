@@ -19,6 +19,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+
         tv_profilesettings=findViewById(R.id.profile_settings);
         tv_profilesettings.setOnClickListener(new View.OnClickListener() {
             @Override

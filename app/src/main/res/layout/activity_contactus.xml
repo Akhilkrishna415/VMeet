@@ -20,8 +20,8 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="15sp"
         android:fontFamily="sans-serif"
         android:text="Contact us"
         android:textColor="@color/white"
@@ -35,10 +35,10 @@
 
         <ImageButton
             android:id="@+id/imageButton5"
-            android:layout_width="130dp"
-            android:layout_height="133dp"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="130sp"
+            android:layout_height="133sp"
+            android:layout_marginLeft="140sp"
+            android:layout_marginTop="100sp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/cci" />
 
@@ -46,8 +46,8 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="13sp"
+            android:layout_marginBottom="10sp"
             android:text="Contact Us"
             android:textAlignment="center"
             android:textColor="#392A2A"
@@ -59,7 +59,7 @@
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="30sp"
             android:text="For any queries, please contact to our supporting team"
             android:textAlignment="center"
             android:textColor="#000000"
@@ -68,8 +68,8 @@
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="42sp"
+            android:layout_marginTop="40sp"
             android:text="Email: Vmeetsupportteam@gmail.com"
             android:textAlignment="center"
             android:textColor="#000000"
@@ -82,14 +82,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="70sp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
-                    android:layout_height="39dp"
+                    android:layout_height="39sp"
                     android:text="Call us:5135699966"
                     android:textAlignment="center"
                     android:textColor="#000000"
@@ -102,17 +102,17 @@
                 android:layout_weight="1">
 
                 <LinearLayout
-                    android:layout_width="472dp"
-                    android:layout_height="101dp"
+                    android:layout_width="472sp"
+                    android:layout_height="101sp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageButton
                         android:id="@+id/imageButton2"
-                        android:layout_width="104dp"
-                        android:layout_height="75dp"
-                        android:layout_marginLeft="90dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_width="104sp"
+                        android:layout_height="75sp"
+                        android:layout_marginLeft="90sp"
+                        android:layout_marginTop="20sp"
                         android:scaleType="fitXY"
                         android:textAlignment="center"
                         app:srcCompat="@drawable/call" />
@@ -120,15 +120,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="104dp"
+                    android:layout_height="104sp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <ImageButton
                         android:id="@+id/imageButton3"
-                        android:layout_width="99dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_width="99sp"
+                        android:layout_height="70sp"
+                        android:layout_marginTop="20sp"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/gmail" />
                 </LinearLayout>
