@@ -3,12 +3,14 @@ package com.example.vmeet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,16 @@ public class Editprofile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         Intent data=getIntent();
+
+        /*Toolbar configuration and back button start */
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+//        myToolbar.setNavigationIcon(R.drawable.iconbackarrowcustom);
+//        setSupportActionBar(myToolbar);
+//        getSupportActionBar().setTitle("Edit profile");
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*Toolbar configuration and back button End */
 
         Ep_email=findViewById(R.id.editTextEmailAddress);
         Ep_phone=findViewById(R.id.editTextPhone);
@@ -174,5 +186,19 @@ public class Editprofile extends AppCompatActivity {
 
 
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                // app icon in action bar clicked; go home
+//                Intent intent = new Intent(this, Profile_settings.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     }

@@ -17,15 +17,7 @@
         android:backgroundTint="@color/mainText"
         android:theme="?attr/actionBarTheme" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Settings"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:layout_marginLeft="125sp"/>
+
 
     <LinearLayout
         android:id="@+id/settingspane"
@@ -160,12 +152,13 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/settingscontactus"
+                    android:layout_width="58sp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginRight="20sp"
                     android:layout_weight="1"
-                    android:padding="10sp"
-                    app:srcCompat="@drawable/contactus" />
+                    app:srcCompat="@drawable/settingscontact" />
 
                 <TextView
                     android:id="@+id/contactus"
