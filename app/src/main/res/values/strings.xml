@@ -26,6 +26,11 @@
     <string name="heading_rem_swHw">List of Software &amp; Hardware</string>
     <string name="admin_dash_addhwsw">Add Hardware &amp; \n Software></string>
     <string name="admin_remove_hwsw">Remove Hardware &amp; \n Software></string>
+    <string name="room_booking">Book a Room</string>
+    <string name="mybookings">My Bookings</string>
+    <string name="request_service">Request a Service</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>
