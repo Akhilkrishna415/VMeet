@@ -11,25 +11,28 @@
         <item
             android:id="@+id/nav_roombooking"
             android:icon="@drawable/roombookingv"
-            android:title="Room Booking" />
+            android:title="@string/room_booking" />
         <item
             android:id="@+id/nav_mybookings"
             android:icon="@drawable/roombookingnew"
-            android:title="MyBookings" />
+            android:title="@string/mybookings" />
         <item
             android:id="@+id/nav_requestservice"
             android:icon="@drawable/requestservicenew"
-            android:title="Request Service" />
+            android:title="@string/request_service" />
         <item android:title="More">
             <menu>
                 <item
                     android:id="@+id/menu2settings"
                     android:icon="@drawable/settings"
-                    android:title="Settings"/>
-                <item android:id="@+id/menu2feedback" android:icon="@drawable/feedback" android:title="Share Feedback"/>
-                <item android:id="@+id/menu2help" android:icon="@drawable/help" android:title="Need Assistance?"/>
+                    android:title="@string/settings" />
+                <!--                <item android:id="@+id/menu2feedback" android:icon="@drawable/feedback" android:title="Share Feedback"/>-->
+                <!--                <item android:id="@+id/menu2help" android:icon="@drawable/help" android:title="Need Assistance?"/>-->
             </menu>
         </item>
-        <item android:id="@+id/menu3logout" android:icon="@drawable/logout" android:title="Logout"/>
+        <item
+            android:id="@+id/menu3logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
     </group>
 </menu>

@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -77,7 +78,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
-    
+
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setCheckable(true);
         int id = item.getItemId();
@@ -87,9 +88,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Homepage.this,Settings.class));
         }
         else if(id==R.id.menu3logout) {
-            startActivity(new Intent(Homepage.this,Login.class));
-        }else if(id == R.id.nav_roombooking){
-            startActivity(new Intent(Homepage.this,RemoveHardewareSoftware.class));
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
+            startActivity(intent);
+        }else if (id == R.id.nav_roombooking) {
+            startActivity(new Intent(Homepage.this, CreatePostActivity.class));
+        } else if (id == R.id.nav_mybookings) {
+            startActivity(new Intent(Homepage.this, CreatePostActivity.class));
+        } else if (id == R.id.nav_requestservice) {
+            startActivity(new Intent(Homepage.this, RequestMaintenance.class));
         }
         return false;
     }

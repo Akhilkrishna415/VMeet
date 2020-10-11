@@ -9,6 +9,7 @@
 
     <include
         layout="@layout/toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -20,7 +21,7 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="295dp"
+            android:layout_width="350dp"
             android:layout_height="90dp"
             android:text="New Maintenance Request"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -28,7 +29,7 @@
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="49dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@drawable/requestservicenew" />

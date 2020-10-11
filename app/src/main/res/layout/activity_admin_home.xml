@@ -8,8 +8,8 @@
     tools:context=".AdminHome">
 
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
+        android:id="@+id/adtoolbar"
+        layout="@layout/admintoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/imageView"
         android:layout_width="75sp"
         android:layout_height="75sp"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/adtoolbar"
         android:layout_centerHorizontal="true"
         android:layout_margin="10sp"
         android:src="@drawable/logo" />

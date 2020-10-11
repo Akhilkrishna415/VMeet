@@ -40,13 +40,18 @@ public class Login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
-                if (mFirebaseUser != null) {
+
+                if (mFirebaseUser != null && !mFirebaseUser.getEmail().equalsIgnoreCase("vmeetadmin@gmail.com")) {
                     Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Login.this, Homepage.class);
                     startActivity(i);
                 }
-                else {
-                    Toast.makeText(Login.this, "Please Login", Toast.LENGTH_SHORT).show();
+                if (mFirebaseUser != null && mFirebaseUser.getEmail().equalsIgnoreCase("vmeetadmin@gmail.com")) {
+//                    Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(Login.this, AdminHome.class);
+                    startActivity(i);
+                } else {
+//                    Toast.makeText(Login.this, "Please Login", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -78,7 +83,14 @@ public class Login extends AppCompatActivity {
                                         Log.d("TAG", "signInWithEmail:success");
                                         Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Intent i = new Intent(getApplicationContext(), Homepage.class);
+                                        String userEmail = mAuth.getCurrentUser().getEmail();
+                                        Toast.makeText(Login.this, "You are logged in" + userEmail, Toast.LENGTH_SHORT).show();
+                                        Intent i;
+                                        if (userEmail.equalsIgnoreCase("vmeetadmin@gmail.com")) {
+                                            i = new Intent(getApplicationContext(), AdminHome.class);
+                                        } else {
+                                            i = new Intent(getApplicationContext(), Homepage.class);
+                                        }
                                         startActivity(i);
 //                                    updateUI(user);
                                     } else {
