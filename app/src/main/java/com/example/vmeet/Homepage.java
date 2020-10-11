@@ -95,7 +95,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }else if (id == R.id.nav_roombooking) {
             startActivity(new Intent(Homepage.this, CreatePostActivity.class));
         } else if (id == R.id.nav_mybookings) {
-            startActivity(new Intent(Homepage.this, CreatePostActivity.class));
+            startActivity(new Intent(Homepage.this, MyBooking.class));
         } else if (id == R.id.nav_requestservice) {
             startActivity(new Intent(Homepage.this, RequestMaintenance.class));
         }
