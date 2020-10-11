@@ -7,8 +7,18 @@
     android:orientation="vertical"
     tools:context=".MyBooking">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:backgroundTint="@color/mainText"
+        android:theme="?attr/actionBarTheme" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mybooking_recycler"
+        android:layout_margin="2sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
