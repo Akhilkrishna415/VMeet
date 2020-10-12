@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment {
 
         recycler.setLayoutManager(layoutManager);
         recycler.setAdapter(adapterv2);
-
         recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recycler.setHasFixedSize(true);
 

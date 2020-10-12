@@ -31,6 +31,8 @@
     <string name="request_service">Request a Service</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
+    <string name="signup_text">Already have an account? <font color="#81b5a1">Login Here</font></string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? <font color="#81b5a1">Register</font></string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>

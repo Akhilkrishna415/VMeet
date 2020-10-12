@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +49,15 @@ public class SignUp extends AppCompatActivity {
         etdesign = findViewById(R.id.editTextDesignation);
         fstore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        /*Toolbar configuration and back button start */
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+//        myToolbar.setNavigationIcon(R.drawable.iconbackarrowcustom);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Registration");
+        /*Toolbar configuration and back button End */
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

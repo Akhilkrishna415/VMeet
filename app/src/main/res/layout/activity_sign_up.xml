@@ -13,11 +13,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <include
                 layout="@layout/toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -37,7 +38,7 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="sans-serif"
                 android:text="VMeet"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/mainText"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -176,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@color/mainText"
+                android:background="@drawable/myrect"
                 android:fontFamily="sans-serif"
                 android:text="Register"
                 android:textColor="@color/white" />
@@ -184,14 +185,15 @@
             <TextView
                 android:id="@+id/ExistingUser"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif"
+                android:layout_marginBottom="20sp"
                 android:padding="10dp"
                 android:gravity="center"
-                android:text="Already had an account? Login Here"
-                android:textColor="@color/mainText"
-                android:textSize="15sp"
+                android:text="@string/signup_text"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
         </LinearLayout>

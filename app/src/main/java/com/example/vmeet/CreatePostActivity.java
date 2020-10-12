@@ -1,19 +1,23 @@
 package com.example.vmeet;
 
-        import android.app.DatePickerDialog;
-        import android.app.TimePickerDialog;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.DatePicker;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.TimePicker;
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
-        import androidx.appcompat.app.AppCompatActivity;
-        import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
-        import java.text.DateFormat;
-        import java.util.Calendar;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class CreatePostActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     boolean  isStartTime=false;
@@ -22,7 +26,15 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
 
-
+        /*Toolbar configuration and back button start */
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        myToolbar.setNavigationIcon(R.drawable.iconbackarrowcustom);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("New Booking");
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*Toolbar configuration and back button End */
 
         //StartTime
 
@@ -59,6 +71,21 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, Homepage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
@@ -84,15 +111,17 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
     }
 
-    private void endTime(TimePicker view,int hourOfDay, int minute) {
+    @SuppressLint("SetTextI18n")
+    private void endTime(TimePicker view, int hourOfDay, int minute) {
         EditText et = (EditText) findViewById(R.id.etime);
-        et.setText("Hour: " + hourOfDay + " Minute: " + minute);
+        et.setText(hourOfDay + " : " + minute);
 
     }
 
-    private void statTime(TimePicker view,int hourOfDay, int minute) {
+    @SuppressLint("SetTextI18n")
+    private void statTime(TimePicker view, int hourOfDay, int minute) {
         EditText st=(EditText) findViewById(R.id.stime);
-        st.setText("Hour: " + hourOfDay + " Minute: " + minute);
+        st.setText(hourOfDay + " : " + minute);
 
     }
 }

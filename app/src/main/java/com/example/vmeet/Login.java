@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity {
                                         String userEmail = mAuth.getCurrentUser().getEmail();
                                         Toast.makeText(Login.this, "You are logged in" + userEmail, Toast.LENGTH_SHORT).show();
                                         Intent i;
-                                        if (userEmail.equalsIgnoreCase("vmeetadmin@gmail.com")) {
+                                        if (userEmail.equalsIgnoreCase("vmeetAdmin@gmail.com")) {
                                             i = new Intent(getApplicationContext(), AdminHome.class);
                                         } else {
                                             i = new Intent(getApplicationContext(), Homepage.class);
