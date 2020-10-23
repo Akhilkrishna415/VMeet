@@ -65,23 +65,22 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
                 titleOfNewHWSW = hwswtitle.getText().toString();
                 HWSWVersionValue = versionVal.getText().toString();
                 String text = spinner.getSelectedItem().toString();
-                String dbTable = "";
+                String dbTable="";
                 isActive = active.isChecked();
                 if (titleOfNewHWSW.isEmpty() && HWSWVersionValue.isEmpty()) {
                     Toast.makeText(AdminAddHardwareSoftware.this, "Fields are Empty!", Toast.LENGTH_SHORT).show();
                 } else {
 
                     userID = mAuth.getCurrentUser().getUid();
-                    if (text.equalsIgnoreCase("hardware")) {
+                    if(text.equalsIgnoreCase("hardware")){
                         dbTable = "Hardware";
-                    }
-                    if (text.equalsIgnoreCase("software")) {
+                    }if(text.equalsIgnoreCase("software")){
                         dbTable = "Software";
                     }
 
                     DocumentReference documentReference = fstore.collection("Equipment").document(userID);
                     Map<String, Object> room = new HashMap<>();
-                    room.put("Request Type", dbTable);
+                    room.put("Request Type",dbTable);
                     room.put("Title", titleOfNewHWSW);
                     room.put("Version", HWSWVersionValue);
                     room.put("isActive", isActive);

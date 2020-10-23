@@ -19,18 +19,19 @@
         android:layout_gravity="center_vertical"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profileimg"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            app:civ_border_color="@color/background"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10sp"
             android:layout_weight="1"
+            android:layout_margin="10sp"
             android:orientation="vertical">
 
             <TextView
@@ -39,21 +40,22 @@
                 android:layout_height="39dp"
                 android:layout_weight="1"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:textSize="20sp"
                 android:text="@string/nav_header_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="20sp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
             <TextView
                 android:id="@+id/profileemail"
+                android:paddingTop="10sp"
+                android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10sp"
-                android:text="@string/nav_header_subtitle"
-                android:textSize="18sp" />
+                android:text="@string/nav_header_subtitle" />
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 </LinearLayout>

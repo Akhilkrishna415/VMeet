@@ -34,7 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
@@ -42,9 +42,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     FirebaseUser user;
     FirebaseFirestore fStore;
     ImageView profileImg;
-    TextView profileName, profileEmail;
+    TextView profileName,profileEmail;
     StorageReference storageReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +73,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         setUserDetails();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
-                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close){
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -97,6 +96,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         */
+
+
 
 
     }
@@ -132,7 +133,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             Intent intent = new Intent(getApplicationContext(), Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
             startActivity(intent);
-        } else if (id == R.id.nav_roombooking) {
+        }else if (id == R.id.nav_roombooking) {
             startActivity(new Intent(Homepage.this, CreatePostActivity.class));
         } else if (id == R.id.nav_mybookings) {
             startActivity(new Intent(Homepage.this, MyBooking.class));
@@ -142,20 +143,20 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         return false;
     }
 
-    /*
-     * Setting the user details on the homepage navigation Drawer with
-     * User full Name
-     * User Designation
-     * User Profile Image
-     * */
+/*
+* Setting the user details on the homepage navigation Drawer with
+* User full Name
+* User Designation
+* User Profile Image
+* */
     private void setUserDetails() {
 
-        fStore = FirebaseFirestore.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
+        fStore= FirebaseFirestore.getInstance();
+        storageReference= FirebaseStorage.getInstance().getReference();
         String userId = mAuth.getCurrentUser().getUid();
 
 
-        StorageReference profileRef = storageReference.child("Users/" + mAuth.getCurrentUser().getUid() + "profile.jpg");
+        StorageReference profileRef=storageReference.child("Users/"+mAuth.getCurrentUser().getUid()+"profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -164,7 +165,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         });
 
 
-        DocumentReference documentReference = fStore.collection("Users").document(userId);
+        DocumentReference documentReference=fStore.collection("Users").document(userId);
         documentReference.addSnapshotListener(Homepage.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -172,10 +173,10 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 String name = documentSnapshot.getString("Name");
                 profileName.setText("");
                 profileEmail.setText("");
-                if (!name.isEmpty()) {
+                if(!name.isEmpty()){
                     profileName.setText(name);
                 }
-                if (!email.isEmpty()) {
+                if(!email.isEmpty()){
                     profileEmail.setText(email);
                 }
             }

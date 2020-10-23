@@ -52,8 +52,8 @@
                 android:fontFamily="sans-serif"
                 android:padding="10dp"
                 android:text="Full Name: "
-                android:textColor="@color/mainText"
                 android:textSize="18sp"
+                android:textColor="@color/mainText"
                 android:textStyle="bold" />
 
 
@@ -61,10 +61,10 @@
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:layout_margin="5dp"
                 android:padding="10dp"
+                android:inputType="textPersonName"
                 android:text="" />
 
             <TextView

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MyBooking"></activity>
+        <activity android:name=".RemoveRooms"></activity>
+        <activity android:name=".MyBooking" />
         <activity android:name=".RequestMaintenance" />
         <activity android:name=".CreatePostActivity" />
         <activity android:name=".AdminHome" />
