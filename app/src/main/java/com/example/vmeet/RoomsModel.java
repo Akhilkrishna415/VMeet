@@ -1,7 +1,7 @@
 package com.example.vmeet;
 
 public class RoomsModel {
-    private  String floor, room_type, room_number;
+    private String floor, room_type, room_number;
 
     public RoomsModel(String floor, String room_type, String room_number) {
         this.floor = floor;
