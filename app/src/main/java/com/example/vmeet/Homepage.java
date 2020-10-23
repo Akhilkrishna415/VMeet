@@ -1,12 +1,16 @@
 package com.example.vmeet;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,20 +20,41 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
-public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    FirebaseFirestore fStore;
+    ImageView profileImg;
+    TextView profileName, profileEmail;
+    StorageReference storageReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,14 +63,28 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 startActivity(i);
             }
         });
-        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        //navigation view user Details
+        drawer = findViewById(R.id.drawer_layout);
+        profileName = (TextView) headerView.findViewById(R.id.profilename);
+        profileEmail = (TextView) headerView.findViewById(R.id.profileemail);
+        profileImg = (ImageView) headerView.findViewById(R.id.profileimg);
+        setUserDetails();
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
+                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                setUserDetails();
+            }
+
+        };
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
        /* // Passing each menu ID as a set of Ids because each
@@ -58,6 +97,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         */
+
 
     }
 
@@ -92,7 +132,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             Intent intent = new Intent(getApplicationContext(), Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
             startActivity(intent);
-        }else if (id == R.id.nav_roombooking) {
+        } else if (id == R.id.nav_roombooking) {
             startActivity(new Intent(Homepage.this, CreatePostActivity.class));
         } else if (id == R.id.nav_mybookings) {
             startActivity(new Intent(Homepage.this, MyBooking.class));
@@ -100,6 +140,48 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Homepage.this, RequestMaintenance.class));
         }
         return false;
+    }
+
+    /*
+     * Setting the user details on the homepage navigation Drawer with
+     * User full Name
+     * User Designation
+     * User Profile Image
+     * */
+    private void setUserDetails() {
+
+        fStore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        String userId = mAuth.getCurrentUser().getUid();
+
+
+        StorageReference profileRef = storageReference.child("Users/" + mAuth.getCurrentUser().getUid() + "profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(profileImg);
+            }
+        });
+
+
+        DocumentReference documentReference = fStore.collection("Users").document(userId);
+        documentReference.addSnapshotListener(Homepage.this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                String email = documentSnapshot.getString("Designation");
+                String name = documentSnapshot.getString("Name");
+                profileName.setText("");
+                profileEmail.setText("");
+                if (!name.isEmpty()) {
+                    profileName.setText(name);
+                }
+                if (!email.isEmpty()) {
+                    profileEmail.setText(email);
+                }
+            }
+        });
+
+
     }
 
 }

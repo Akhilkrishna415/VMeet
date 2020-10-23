@@ -30,7 +30,7 @@ public class SignUp extends AppCompatActivity {
     public static final String TAG = "TAG";
     TextView userExist;
     Button btnReg;
-    EditText etemail, etpwd, etphone, etstaffid, etdpart, etdesign;
+    EditText etemail, etpwd, etphone, etstaffid, etdpart, etdesign, etName;
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore fstore;
     String userID;
@@ -47,6 +47,7 @@ public class SignUp extends AppCompatActivity {
         etstaffid = findViewById(R.id.editTextStaffID);
         etdpart = findViewById(R.id.editTextDepartment);
         etdesign = findViewById(R.id.editTextDesignation);
+        etName = findViewById(R.id.editTextName);
         fstore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -67,6 +68,7 @@ public class SignUp extends AppCompatActivity {
                 final String staffID = etstaffid.getText().toString();
                 final String depart = etdpart.getText().toString();
                 final String design = etdesign.getText().toString();
+                final String name = etName.getText().toString();
                 if (email.isEmpty()) {
                     etemail.setError("Please enter the email ID");
                     etemail.requestFocus();
@@ -87,6 +89,7 @@ public class SignUp extends AppCompatActivity {
                                 DocumentReference documentReference = fstore.collection("Users").document(userID);
                                 Map<String, Object> user = new HashMap<>();
                                 user.put("Email", email);
+                                user.put("Name", name);
                                 user.put("Staffid", staffID);
                                 user.put("Phone Number", phone);
                                 user.put("Department", depart);

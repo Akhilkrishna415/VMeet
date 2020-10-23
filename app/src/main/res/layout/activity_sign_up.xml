@@ -43,6 +43,30 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif"
+                android:padding="10dp"
+                android:text="Full Name: "
+                android:textColor="@color/mainText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:text="" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"

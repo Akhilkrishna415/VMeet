@@ -22,18 +22,21 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="20sp"
+                android:id="@+id/welcomeString"
                 android:text="Welcome Sanjay"
-                android:textColor="@color/background"
+                android:textColor="@color/tea1"
                 android:textSize="30dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-light"
+                android:id="@+id/date"
+                android:fontFamily="sans-serif"
                 android:gravity="right"
                 android:paddingRight="10sp"
+                android:textColor="@color/tomato"
                 android:text="October 20 2020"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,7 +44,7 @@
                 android:layout_margin="15dp"
                 android:text="Your meetings for Today:"
                 android:textColor="@color/mainText"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -58,11 +61,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-condensed"
-                android:paddingLeft="10sp"
+                android:paddingStart="10sp"
                 android:textColor="@color/mainText"
                 android:text="Other meetings"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
 
             <!--            <TextView-->
             <!--                android:id="@+id/textView2"-->

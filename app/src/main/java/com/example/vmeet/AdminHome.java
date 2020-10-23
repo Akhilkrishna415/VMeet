@@ -40,12 +40,12 @@ public class AdminHome extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RemoveHardewareSoftware.class));
             }
         });
-        remvRooms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RemoveHardewareSoftware.class));
-            }
-        });
+//        remvRooms.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(), RemoveRooms.class));
+//            }
+//        });
         addRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

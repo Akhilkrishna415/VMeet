@@ -39,7 +39,7 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
     private void loadhardwareSoftware() {
         db = FirebaseFirestore.getInstance();
         Log.d("sanjay", "Entering Breakfast list loadMenu");
-        db.collection("Hardware")
+        db.collection("Equipment")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

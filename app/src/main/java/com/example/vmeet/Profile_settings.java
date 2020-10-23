@@ -75,6 +75,7 @@ public class Profile_settings extends AppCompatActivity {
 
         userId=fAuth.getCurrentUser().getUid();
 
+
         DocumentReference documentReference=fStore.collection("Users").document(userId);
         Log.v("naveen", String.valueOf(documentReference));
         documentReference.addSnapshotListener(Profile_settings.this, new EventListener<DocumentSnapshot>() {
@@ -105,7 +106,6 @@ public class Profile_settings extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     @Override

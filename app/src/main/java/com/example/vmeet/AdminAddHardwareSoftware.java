@@ -32,13 +32,14 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
     FirebaseFirestore fstore;
     String userID;
     private FirebaseAuth mAuth;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_hardware_software);
 
-        Spinner spinner = (Spinner) findViewById(R.id.selectHwSw);
+        spinner = (Spinner) findViewById(R.id.selectHwSw);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.adminHardwareSoftware, android.R.layout.simple_spinner_item);
@@ -48,12 +49,14 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
+
         btnaddHwSw = findViewById(R.id.addhwSw);
         hwswtitle = findViewById(R.id.hwswtitle);
         versionVal = findViewById(R.id.versionVal);
         active = findViewById(R.id.active);
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
+
         btnaddHwSw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,14 +64,24 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
                 boolean isActive;
                 titleOfNewHWSW = hwswtitle.getText().toString();
                 HWSWVersionValue = versionVal.getText().toString();
+                String text = spinner.getSelectedItem().toString();
+                String dbTable = "";
                 isActive = active.isChecked();
                 if (titleOfNewHWSW.isEmpty() && HWSWVersionValue.isEmpty()) {
                     Toast.makeText(AdminAddHardwareSoftware.this, "Fields are Empty!", Toast.LENGTH_SHORT).show();
                 } else {
 
                     userID = mAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = fstore.collection("Hardware").document(userID);
+                    if (text.equalsIgnoreCase("hardware")) {
+                        dbTable = "Hardware";
+                    }
+                    if (text.equalsIgnoreCase("software")) {
+                        dbTable = "Software";
+                    }
+
+                    DocumentReference documentReference = fstore.collection("Equipment").document(userID);
                     Map<String, Object> room = new HashMap<>();
+                    room.put("Request Type", dbTable);
                     room.put("Title", titleOfNewHWSW);
                     room.put("Version", HWSWVersionValue);
                     room.put("isActive", isActive);
