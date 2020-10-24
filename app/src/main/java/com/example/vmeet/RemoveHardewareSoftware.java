@@ -47,13 +47,13 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("sanjay", document.getId() + " => " + document.getData());
-                                System.out.println("Hello" + document.getId() + " => " + document.getData());
+//                                System.out.println("Hello" + document.getId() + " => " + document.getData());
                                 String title = (String) document.getData().get("Title");
                                 String version = (String) document.getData().get("Version");
                                 boolean isActive = (boolean) document.getData().get("isActive");
                                 hwSwList.add(new HwSwModel(title, version, isActive));
                                 setProdItemRecycler(hwSwList);
-                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + hwSwList.toString());
+//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + hwSwList.toString());
                             }
 
                         } else {

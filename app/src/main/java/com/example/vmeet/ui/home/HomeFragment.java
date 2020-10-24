@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     String[] Timev2 = {"3:00 PM", "2:30 PM"};
     FirebaseFirestore fStore;
     FirebaseAuth mAuth;
-    TextView welcomeStr,welcomedate;
+    TextView welcomeStr, welcomedate;
     private RecyclerView recycler, recyclerView;
     private RecyclerView.Adapter adapterv2;
     private RecyclerView.LayoutManager layoutManager;
@@ -55,8 +55,8 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        welcomeStr = (TextView)  root.findViewById(R.id.welcomeString);
-        welcomedate = (TextView)  root.findViewById(R.id.date);
+        welcomeStr = (TextView) root.findViewById(R.id.welcomeString);
+        welcomedate = (TextView) root.findViewById(R.id.date);
         layoutManager = new LinearLayoutManager(getContext());
         recycler = root.findViewById(R.id.meetings1);
         recyclerView = root.findViewById(R.id.meetings2);
@@ -88,12 +88,12 @@ public class HomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         String userId = mAuth.getCurrentUser().getUid();
-        Task<DocumentSnapshot> docRef=fStore.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Task<DocumentSnapshot> docRef = fStore.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-               name = task.getResult().getString("Name");
-               welcomeStr.setText("Welcome " + name +",");
+                name = task.getResult().getString("Name");
+                welcomeStr.setText("Welcome " + name + ",");
             }
         });
 

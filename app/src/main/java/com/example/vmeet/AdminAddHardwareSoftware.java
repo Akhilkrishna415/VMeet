@@ -78,17 +78,18 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
                         dbTable = "Software";
                     }
 
-                    DocumentReference documentReference = fstore.collection("Equipment").document(userID);
+
                     Map<String, Object> room = new HashMap<>();
                     room.put("Request Type",dbTable);
                     room.put("Title", titleOfNewHWSW);
                     room.put("Version", HWSWVersionValue);
                     room.put("isActive", isActive);
-                    documentReference.set(room).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    fstore.collection("Equipment").add(room).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
+                        public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(AdminAddHardwareSoftware.this, "New Hardware has been added to the database..!", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "onSuccess: New Hardware has been added to the database..!" + userID);
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
