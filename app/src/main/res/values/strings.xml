@@ -33,6 +33,10 @@
     <string name="logout"><font color="#008080"><b>Logout</b></font></string>
     <string name="signup_text">Already have an account? <font color="#008080"><b>Login Here</b></font></string>
     <string name="don_t_have_an_account_register">Don\'t have an account? <font color="#008080"><b>Register</b></font></string>
+
+    <string name="As">Available Softwares</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="ClearAll">ClearAll</string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>
@@ -50,5 +54,49 @@
         <item>Hardware</item>
         <item>Software</item>
         <item>Room Maintenance</item>
+    </string-array>
+
+    <string-array name="Roomsp">
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+    </string-array>
+
+    <string-array name="stime">
+        <item>9:00 AM</item>
+        <item>9:30 AM</item>
+        <item>10:00 AM</item>
+        <item>10:30 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>12:00 PM</item>
+        <item>12:30 PM</item>
+        <item>01:00 PM</item>
+        <item>01:30 PM</item>
+        <item>02:00 PM</item>
+        <item>2:30 PM</item>
+        <item>3:00 PM</item>
+        <item>3:30 PM</item>
+        <item>4:00 PM</item>
+        <item>4:30 PM</item>
+    </string-array>
+    <string-array name="etime">
+        <item>9:00 AM</item>
+        <item>9:30 AM</item>
+        <item>10:00 AM</item>
+        <item>10:30 AM</item>
+        <item>11:00 AM</item>
+        <item>11:30 AM</item>
+        <item>12:00 PM</item>
+        <item>12:30 PM</item>
+        <item>01:00 PM</item>
+        <item>01:30 PM</item>
+        <item>02:00 PM</item>
+        <item>2:30 PM</item>
+        <item>3:00 PM</item>
+        <item>3:30 PM</item>
+        <item>4:00 PM</item>
+        <item>4:30 PM</item>
     </string-array>
 </resources>

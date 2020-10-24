@@ -34,6 +34,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -127,7 +129,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         if(id==R.id.menu2settings){
             startActivity(new Intent(Homepage.this,Settings.class));
         }
-        else if(id==R.id.menu3logout) {
+        else if (id == R.id.menu3logout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
@@ -168,15 +170,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         documentReference.addSnapshotListener(Homepage.this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                String email = documentSnapshot.getString("Designation");
-                String name = documentSnapshot.getString("Name");
+                assert documentSnapshot != null;
+//                String email = ;
+//                String name = ;
                 profileName.setText("");
                 profileEmail.setText("");
-                if (!name.isEmpty()) {
-                    profileName.setText(name);
+                if (!Objects.requireNonNull(documentSnapshot.getString("Name")).isEmpty()) {
+                    profileName.setText(documentSnapshot.getString("Name"));
                 }
-                if (!email.isEmpty()) {
-                    profileEmail.setText(email);
+                if (!Objects.requireNonNull(documentSnapshot.getString("Designation")).isEmpty()) {
+                    profileEmail.setText(documentSnapshot.getString("Designation"));
                 }
             }
         });
