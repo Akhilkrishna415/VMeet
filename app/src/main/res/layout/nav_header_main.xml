@@ -25,6 +25,7 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             app:civ_border_width="2dp"
+            android:src="@drawable/defaultprofileimg"
             app:civ_border_color="@color/background"/>
 
         <LinearLayout

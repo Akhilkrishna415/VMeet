@@ -94,6 +94,7 @@ public class SignUp extends AppCompatActivity {
                                 user.put("Phone Number", phone);
                                 user.put("Department", depart);
                                 user.put("Designation", design);
+                                user.put("profile_img_url","gs://vmeet-2fd0d.appspot.com/Users/defaultprofileimg.png");
                                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {

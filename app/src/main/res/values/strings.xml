@@ -37,6 +37,7 @@
     <string name="As">Available Softwares</string>
     <string name="Dismiss">Dismiss</string>
     <string name="ClearAll">ClearAll</string>
+    <string name="AppName" ><font color="#008080"><span style="background_color:'#81b5a1'">VMeet</span></font></string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>

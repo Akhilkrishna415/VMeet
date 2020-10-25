@@ -3,6 +3,7 @@ package com.example.vmeet;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,17 +20,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
@@ -38,7 +40,6 @@ import java.util.Objects;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -46,6 +47,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     ImageView profileImg;
     TextView profileName, profileEmail;
     StorageReference storageReference;
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +106,6 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -124,24 +125,40 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setCheckable(true);
         int id = item.getItemId();
-        drawer.close();
-        drawer.animate();
-        if(id==R.id.menu2settings){
-            startActivity(new Intent(Homepage.this,Settings.class));
+        switch (id) {
+            case R.id.menu2settings:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, Settings.class));
+                break;
+
+            case R.id.menu3logout:
+                drawer.close();
+                drawer.animate();
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
+                break;
+
+            case R.id.nav_roombooking:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, CreatePostActivity.class));
+                break;
+
+            case R.id.nav_mybookings:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, MyBooking.class));
+                break;
+            case R.id.nav_requestservice:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, RequestMaintenance.class));
+                break;
         }
-        else if (id == R.id.menu3logout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
-            startActivity(intent);
-        } else if (id == R.id.nav_roombooking) {
-            startActivity(new Intent(Homepage.this, CreatePostActivity.class));
-        } else if (id == R.id.nav_mybookings) {
-            startActivity(new Intent(Homepage.this, MyBooking.class));
-        } else if (id == R.id.nav_requestservice) {
-            startActivity(new Intent(Homepage.this, RequestMaintenance.class));
-        }
-        return false;
+        return true;
     }
 
     /*
@@ -156,35 +173,50 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         storageReference = FirebaseStorage.getInstance().getReference();
         String userId = mAuth.getCurrentUser().getUid();
 
-
-        StorageReference profileRef = storageReference.child("Users/" + mAuth.getCurrentUser().getUid() + "profile.jpg");
-        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(profileImg);
-            }
-        });
+        try {
+            StorageReference profileRef = storageReference.child("Users/" + mAuth.getCurrentUser().getUid() + "profile.jpg");
+//            System.out.println("sanjay" + profileRef.toString());
+                profileRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        if (exception instanceof StorageException &&
+                                ((StorageException) exception).getErrorCode() == StorageException.ERROR_OBJECT_NOT_FOUND) {
+                            Log.d("EXCEPTION", "Profile photo does not exist");
+                        }
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(profileImg);
+                    }
+                });
+        } catch (Exception e) {
+            Log.v("EXCEPTION : ", e.getMessage());
+        }
 
 
         DocumentReference documentReference = fStore.collection("Users").document(userId);
-        documentReference.addSnapshotListener(Homepage.this, new EventListener<DocumentSnapshot>() {
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                assert documentSnapshot != null;
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 //                String email = ;
 //                String name = ;
+
                 profileName.setText("");
                 profileEmail.setText("");
-                if (!Objects.requireNonNull(documentSnapshot.getString("Name")).isEmpty()) {
-                    profileName.setText(documentSnapshot.getString("Name"));
+                if (!Objects.requireNonNull(task.getResult().getString("Name")).isEmpty()) {
+                    profileName.setText(task.getResult().getString("Name"));
                 }
-                if (!Objects.requireNonNull(documentSnapshot.getString("Designation")).isEmpty()) {
-                    profileEmail.setText(documentSnapshot.getString("Designation"));
+                if (!Objects.requireNonNull(task.getResult().getString("Designation")).isEmpty()) {
+                    profileEmail.setText(task.getResult().getString("Designation"));
                 }
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("###### ERROR", "Profile information does not exist");
+            }
         });
-
-
     }
 
 }
