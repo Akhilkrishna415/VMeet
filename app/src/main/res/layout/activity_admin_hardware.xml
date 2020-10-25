@@ -116,6 +116,29 @@
                 android:inputType="text"
                 android:padding="10dp" />
 
+            <TextView
+                android:id="@+id/roomImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:fontFamily="sans-serif"
+                android:padding="10dp"
+                android:text="Room Image"
+                android:textColor="@color/mainText"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/UploadRoomImg"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_camera24"
+                />
+
+
+
             <!--        <TextView-->
             <!--            android:id="@+id/textView4"-->
             <!--            android:layout_width="match_parent"-->
