@@ -2,6 +2,7 @@ package com.example.vmeet.ui.home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vmeet.AppAdapter;
+import com.example.vmeet.HwSwAdapter;
+import com.example.vmeet.HwSwModel;
 import com.example.vmeet.R;
 import com.example.vmeet.RecycleModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +26,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,15 +38,18 @@ public class HomeFragment extends Fragment {
 
     final List<RecycleModel> RecycleList = new ArrayList<>();
     private HomeViewModel homeViewModel;
-    String[] MeetingTitle = {"MAD315 exam", "CST 2020 Orientation"};
-    String[] RoomNo = {"205", "103"};
-    String[] Timev2 = {"3:00 PM", "2:30 PM"};
-    FirebaseFirestore fStore;
+
+    /*  String[] MeetingTitle = {"MAD315 exam", "CST 2020 Orientation"};
+      String[] RoomNo = {"205", "103"};
+      String[] Timev2 = {"3:00 PM", "2:30 PM"};
+
+     */
+    FirebaseFirestore db;
     FirebaseAuth mAuth;
     TextView welcomeStr, welcomedate;
-    private RecyclerView recycler, recyclerView;
-    private RecyclerView.Adapter adapterv2;
-    private RecyclerView.LayoutManager layoutManager;
+    RecyclerView recycler, recyclerView;
+    RecyclerView.Adapter adapterv2;
+    RecyclerView.LayoutManager layoutManager;
     String name;
 
     public static HomeFragment newInstance() {
@@ -57,20 +65,12 @@ public class HomeFragment extends Fragment {
 
         welcomeStr = (TextView) root.findViewById(R.id.welcomeString);
         welcomedate = (TextView) root.findViewById(R.id.date);
-        layoutManager = new LinearLayoutManager(getContext());
+        setHeaderInfo();
+        loadInformation();
+
+
         recycler = root.findViewById(R.id.meetings1);
         recyclerView = root.findViewById(R.id.meetings2);
-        adapterv2 = new AppAdapter(MeetingTitle, RoomNo, Timev2);
-        setHeaderInfo();
-        recycler.setLayoutManager(layoutManager);
-        recycler.setAdapter(adapterv2);
-        recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recycler.setHasFixedSize(true);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapterv2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setHasFixedSize(true);
 
 
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -84,11 +84,11 @@ public class HomeFragment extends Fragment {
 
     private void setHeaderInfo() {
 
-        fStore = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
         String userId = mAuth.getCurrentUser().getUid();
-        Task<DocumentSnapshot> docRef = fStore.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Task<DocumentSnapshot> docRef = db.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -103,5 +103,46 @@ public class HomeFragment extends Fragment {
         welcomedate.setText(simpleDateFormat.format(date));
     }
 
+    private void loadInformation(){
+        db = FirebaseFirestore.getInstance();
+        Log.d("nik", "Entering Home menu");
+        db.collection("NewRoomRequest")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String type = (String) document.getData().get("event_Type");
+                                String room = (String) "Room No.-  " + document.getData().get("event_room_number");
+                                String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
+                                String room_img_url = (String) document.getData().get("room_img_url");
+                                RecycleList.add(new RecycleModel(type, room, time,room_img_url));
+                                setProdItemRecycler(RecycleList);
+//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
+                            }
+
+                        } else {
+                            Log.d("", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+
+    private void setProdItemRecycler(List<RecycleModel> RecycleList) {
+
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        recycler.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        adapterv2 = new AppAdapter(RecycleList);
+        recycler.setHasFixedSize(true);
+        recycler.setAdapter(adapterv2);
+
+        //Other meetings recycler view adapter
+        adapterv2 = new AppAdapter(RecycleList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterv2);
+    }
 
 }

@@ -103,8 +103,8 @@
     <color name="dark_magenta">#8B008B</color>
     <color name="dark_red">#8B0000</color>
     <color name="blue_violet">#8A2BE2</color>
-    <color name="light_sky_blue">#87CEFA</color>
-    <color name="sky_blue">#87CEEB</color>
+    <color name="light_sky_blue">#85D0FF</color>
+    <color name="sky_blue">#65D2FF</color>
     <color name="gray">#808080</color>
     <color name="olive">#808000</color>
     <color name="purple">#800080</color>
