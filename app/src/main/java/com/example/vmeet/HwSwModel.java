@@ -1,15 +1,25 @@
 package com.example.vmeet;
 
 public class HwSwModel {
-    private String title, version;
+    private String title;
+    private String version;
+    private String documentID;
     private boolean isActive;
 
-    public HwSwModel(String title, String version, boolean isActive) {
+    public HwSwModel(String title, String version, String documentID, boolean isActive) {
         this.title = title;
         this.version = version;
+        this.documentID = documentID;
         this.isActive = isActive;
     }
 
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
     public String getTitle() {
         return title;
     }

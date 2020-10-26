@@ -39,8 +39,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewH
     }
 
     public void onBindViewHolder(@NonNull ProductViewHolder holder, final int position) {
-        holder.imgtitle.setText(hwswList.get(position).getRoom_number());
-        holder.verText.setText(hwswList.get(position).getRoom_type());
+        holder.imgtitle.setText(hwswList.get(position).getRoom_type());
+        holder.verText.setText(hwswList.get(position).getRoom_number());
         holder.deleteItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

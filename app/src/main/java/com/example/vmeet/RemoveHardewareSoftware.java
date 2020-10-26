@@ -19,7 +19,6 @@ import java.util.List;
 
 public class RemoveHardewareSoftware extends AppCompatActivity {
     final List<HwSwModel> hwSwList = new ArrayList<>();
-    //    ListView BreakFastlist;
     RecyclerView prodItemRecycler;
     HwSwAdapter hwsoftwareAdapter;
     FirebaseFirestore db;
@@ -30,30 +29,29 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
         setContentView(R.layout.activity_remove_hardeware_software);
 
         prodItemRecycler = findViewById(R.id.product_recycler);
-        Log.d("sanjay", "Before finding Breakfast list view id");
-//        BreakFastlist = findViewById(R.id.product_recycler);
-        Log.d("sanjay", "Before finding Breakfast list loadMenu");
         loadhardwareSoftware();
     }
 
     private void loadhardwareSoftware() {
         db = FirebaseFirestore.getInstance();
-        Log.d("sanjay", "Entering Breakfast list loadMenu");
-        db.collection("Equipment")
+        db.collection("Equipment").orderBy("Request Type")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("sanjay", document.getId() + " => " + document.getData());
-//                                System.out.println("Hello" + document.getId() + " => " + document.getData());
-                                String title = (String) document.getData().get("Title");
+//                                Log.d("sanjay", document.getId() + " => " + document.getData());
+                                String initials = "Hw";
+                                if( document.getData().get("Request Type").toString().equalsIgnoreCase("software")){
+                                    initials = "Sw";
+                                }
+                                String title = (String) initials +" - " + document.getData().get("Title");
                                 String version = (String) document.getData().get("Version");
                                 boolean isActive = (boolean) document.getData().get("isActive");
-                                hwSwList.add(new HwSwModel(title, version, isActive));
+                                String documentID = document.getId();
+                                hwSwList.add(new HwSwModel(title, version, documentID, isActive));
                                 setProdItemRecycler(hwSwList);
-//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + hwSwList.toString());
                             }
 
                         } else {

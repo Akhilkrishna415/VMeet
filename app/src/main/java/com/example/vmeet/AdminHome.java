@@ -31,7 +31,7 @@ public class AdminHome extends AppCompatActivity {
         myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         myToolbar.setNavigationIcon(R.drawable.logoutroundeddown);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("Admin Dashboard");
 
         /*Toolbar configuration and back button End */
         remvHwSw.setOnClickListener(new View.OnClickListener() {

@@ -2,7 +2,6 @@ package com.example.vmeet;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,7 +62,7 @@ public class RequestMaintenance extends AppCompatActivity implements AdapterView
                 String username = mFirebaseAuth.getCurrentUser().getDisplayName();
                 String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
                 userID = mFirebaseAuth.getCurrentUser().getUid();
-                DocumentReference documentReference = db.collection("Service Requests").document(userID);
+
                 Map<String, Object> user = new HashMap<>();
                 user.put("Room Number", RoomNo);
                 user.put("Request Type", ReqType);
@@ -71,15 +70,16 @@ public class RequestMaintenance extends AppCompatActivity implements AdapterView
                 user.put("Status", "pending");
                 user.put("Username", username);
                 user.put("UserEmail", userEmail);
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                user.put("created_By",userID);
+                db.collection("Service Requests").add(user).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "onSuccess: Service request added for" + userID);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding request", e);
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "New Maintenance Service Request has been created. Redirecting to Homepage..", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), Homepage.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error while booking the request. Please try again later.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -94,7 +94,7 @@ public class RequestMaintenance extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

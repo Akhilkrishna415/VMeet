@@ -24,8 +24,8 @@
     <string name="issue_desc">Please describe your issue..</string>
     <string name="select_hardware_software">Select Hardware/ Software</string>
     <string name="heading_rem_swHw">List of Software &amp; Hardware</string>
-    <string name="admin_dash_addhwsw">Add Hardware &amp; \n Software></string>
-    <string name="admin_remove_hwsw">Remove Hardware &amp; \n Software></string>
+    <string name="admin_dash_addhwsw">Add Hardware &amp; \n Software</string>
+    <string name="admin_remove_hwsw">Remove Hardware &amp; \n Software</string>
     <string name="room_booking"><font color="#008080"><b> Book a Room </b></font></string>
     <string name="mybookings"><font color="#008080"><b>My Bookings</b></font></string>
     <string name="request_service"><font color="#008080"><b>Request a Service</b></font></string>
@@ -38,6 +38,8 @@
     <string name="Dismiss">Dismiss</string>
     <string name="ClearAll">ClearAll</string>
     <string name="AppName" ><font color="#008080"><span style="background_color:'#81b5a1'">VMeet</span></font></string>
+    <string name="contact_support_text">Queries?</string>
+    <string name="contact_support_text2">Please contact our supporting team</string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>
