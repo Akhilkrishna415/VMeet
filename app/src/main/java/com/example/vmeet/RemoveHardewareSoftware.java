@@ -1,10 +1,13 @@
 package com.example.vmeet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +30,17 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remove_hardeware_software);
+
+
+        /*Toolbar configuration and back button start */
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        myToolbar.setNavigationIcon(R.drawable.iconbackarrowcustom);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Remove Hw/Sw");
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /*Toolbar configuration and back button End */
 
         prodItemRecycler = findViewById(R.id.product_recycler);
         loadhardwareSoftware();
@@ -68,5 +82,19 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
         prodItemRecycler.setLayoutManager(layoutManager);
         hwsoftwareAdapter = new HwSwAdapter(this, hwSwList);
         prodItemRecycler.setAdapter(hwsoftwareAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, AdminHome.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

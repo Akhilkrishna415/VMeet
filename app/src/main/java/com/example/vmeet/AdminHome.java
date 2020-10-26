@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHome extends AppCompatActivity {
 
-    CardView remvHwSw, remvRooms, addRooms, addHwSw;
+    CardView remvHwSw, remvRooms, addRooms, addHwSw, viewRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class AdminHome extends AppCompatActivity {
         remvRooms = findViewById(R.id.remvRoom);
         addRooms = findViewById(R.id.addRooms);
         addHwSw = findViewById(R.id.addhwSw);
+        viewRequests = findViewById(R.id.viewRequests);
 
 
         /*Toolbar configuration and back button start */
@@ -56,6 +57,12 @@ public class AdminHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), AdminAddHardwareSoftware.class));
+            }
+        });
+        viewRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ReceiveServiceRequests.class));
             }
         });
 

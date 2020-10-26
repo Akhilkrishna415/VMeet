@@ -37,7 +37,7 @@
     <string name="As">Available Softwares</string>
     <string name="Dismiss">Dismiss</string>
     <string name="ClearAll">ClearAll</string>
-    <string name="AppName" ><font color="#008080"><span style="background_color:'#81b5a1'">VMeet</span></font></string>
+    <string name="AppName"><font color="#008080"><span style="background_color:'#81b5a1'">VMeet</span></font></string>
     <string name="contact_support_text">Queries?</string>
     <string name="contact_support_text2">Please contact our supporting team</string>
     <string-array name="adminHardwareSoftware">
@@ -57,6 +57,12 @@
         <item>Hardware</item>
         <item>Software</item>
         <item>Room Maintenance</item>
+    </string-array>
+
+    <string-array name="spinnerReqStatus">
+        <item>Select</item>
+        <item>Pending</item>
+        <item>Completed</item>
     </string-array>
 
     <string-array name="Roomsp">

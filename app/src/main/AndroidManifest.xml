@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vmeet">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -9,8 +11,10 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".RemoveRooms"></activity>
+        <activity android:name=".ServiceReqStatus"></activity>
+        <activity android:name=".ReceiveServiceRequests" />
         <activity android:name=".MyBooking" />
+        <activity android:name=".RemoveRooms" />
         <activity android:name=".RequestMaintenance" />
         <activity android:name=".CreatePostActivity" />
         <activity android:name=".AdminHome" />
@@ -40,5 +44,4 @@
         <activity android:name=".SignUp" />
     </application>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>
