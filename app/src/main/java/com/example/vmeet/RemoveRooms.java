@@ -52,7 +52,8 @@ public class RemoveRooms extends AppCompatActivity {
                                 String roomType = (String) document.getData().get("Room Type");
                                 String floor = (String) document.getData().get("Floor");
                                 String roomnumber = (String) document.getData().get("Room Number");
-                                roomList.add(new RoomsModel(floor, roomType, roomnumber));
+                                String documentID = document.getId();
+                                roomList.add(new RoomsModel(floor, roomType, roomnumber, documentID));
                                 setProdItemRecycler(roomList);
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + hwSwList.toString());
                             }

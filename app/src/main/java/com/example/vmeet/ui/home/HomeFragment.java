@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vmeet.AppAdapter;
-import com.example.vmeet.HwSwAdapter;
-import com.example.vmeet.HwSwModel;
 import com.example.vmeet.R;
 import com.example.vmeet.RecycleModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,14 +29,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     final List<RecycleModel> RecycleList = new ArrayList<>();
-    private HomeViewModel homeViewModel;
-
+    final List<RecycleModel> otherMeetingsToday = new ArrayList<>();
     /*  String[] MeetingTitle = {"MAD315 exam", "CST 2020 Orientation"};
       String[] RoomNo = {"205", "103"};
       String[] Timev2 = {"3:00 PM", "2:30 PM"};
@@ -46,11 +44,12 @@ public class HomeFragment extends Fragment {
      */
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    TextView welcomeStr, welcomedate;
+    TextView welcomeStr, welcomedate, noMeetingsText, noMeetingsText2;
     RecyclerView recycler, recyclerView;
     RecyclerView.Adapter adapterv2;
     RecyclerView.LayoutManager layoutManager;
-    String name;
+    String name, userId, getCurrentDate;
+    private HomeViewModel homeViewModel;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -65,6 +64,17 @@ public class HomeFragment extends Fragment {
 
         welcomeStr = (TextView) root.findViewById(R.id.welcomeString);
         welcomedate = (TextView) root.findViewById(R.id.date);
+        noMeetingsText = (TextView) root.findViewById(R.id.noMeetingsText);
+        noMeetingsText2 = (TextView) root.findViewById(R.id.noMeetingsText2);
+
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        getCurrentDate = sdf.format(cal.getTime());
+
         setHeaderInfo();
         loadInformation();
 
@@ -84,49 +94,90 @@ public class HomeFragment extends Fragment {
 
     private void setHeaderInfo() {
 
-        db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
 
-        String userId = mAuth.getCurrentUser().getUid();
         Task<DocumentSnapshot> docRef = db.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 name = task.getResult().getString("Name");
-                welcomeStr.setText("Welcome " + name + ",");
+                welcomeStr.setText("Hi " + name + ",");
             }
         });
 
         Date date = new Date();
-        String pattern = "EEEE MMMM yyyy";
+        String pattern = "dd MMMM yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         welcomedate.setText(simpleDateFormat.format(date));
+
+
     }
 
-    private void loadInformation(){
-        db = FirebaseFirestore.getInstance();
-        Log.d("nik", "Entering Home menu");
+    private void loadInformation() {
         db.collection("NewRoomRequest")
+                .whereEqualTo("userID", userId)
+                .whereEqualTo("created_at", getCurrentDate)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String type = (String) document.getData().get("event_Type");
-                                String room = (String) "Room No.-  " + document.getData().get("event_room_number");
-                                String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
-                                String room_img_url = (String) document.getData().get("room_img_url");
-                                RecycleList.add(new RecycleModel(type, room, time,room_img_url));
-                                setProdItemRecycler(RecycleList);
+//                            System.out.println("Hello" + );
+                            if (task.getResult().size() == 0) {
+                                noMeetingsText.setVisibility(View.VISIBLE);
+                            } else {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String type = (String) document.getData().get("event_Type");
+                                    String room = (String) "Room No.-  " + document.getData().get("event_room_number");
+                                    String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
+                                    String room_img_url = (String) document.getData().get("room_img_url");
+                                    RecycleList.add(new RecycleModel(type, room, time, room_img_url));
+                                    setProdItemRecycler(RecycleList);
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
+                                }
                             }
-
                         } else {
                             Log.d("", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+
+        //Other meetings today
+        db.collection("NewRoomRequest")
+                .whereEqualTo("created_at", getCurrentDate)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            if (task.getResult().size() == 0) {
+                                noMeetingsText2.setVisibility(View.VISIBLE);
+                            } else {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    String type = (String) document.getData().get("event_Type");
+                                    String room = (String) "Room No.-  " + document.getData().get("event_room_number");
+                                    String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
+                                    String room_img_url = (String) document.getData().get("room_img_url");
+                                    otherMeetingsToday.add(new RecycleModel(type, room, time, room_img_url));
+                                    setProdItemRecycler2(otherMeetingsToday);
+//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
+                                }
+                            }
+                        } else {
+                            Log.d("", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void setProdItemRecycler2(List<RecycleModel> otherMeetingsToday) {
+        //Other meetings recycler view adapter
+        layoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        adapterv2 = new AppAdapter(otherMeetingsToday);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterv2);
     }
 
 
@@ -138,11 +189,7 @@ public class HomeFragment extends Fragment {
         recycler.setHasFixedSize(true);
         recycler.setAdapter(adapterv2);
 
-        //Other meetings recycler view adapter
-        adapterv2 = new AppAdapter(RecycleList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterv2);
+
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +55,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
     EditText editTextTitle, editTextstaffID, editTextDept, eventdate, noOfPersons, editTextReason;
     TextView software, username, userDepartment, userStaffId, txthardware;
-    String title, staffId, department, eventDate, startTime, endTime, roomNumber, persons, reason, event, softwareReq, hardwareReq, uId;
+    String title, staffId, department, eventDate, startTime, endTime, roomNumber, persons, reason, event, softwareReq, hardwareReq, userId;
     Spinner eventsp, roomNoSp, stime, etime;
 
     String[] listSoftware, listHardware;
@@ -294,6 +295,11 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                     room_uri = room_url[1];
                 }
 
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String getCurrentDate = sdf.format(cal.getTime());
+
+
                 //submit
                 Map<String, Object> room = new HashMap<>();
                 room.put("user_name", title);
@@ -309,9 +315,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                 room.put("no_Of_Attendees", persons);
                 room.put("additional_comments", reason);
                 room.put("room_img_url", room_uri);
+                room.put("created_at", getCurrentDate);
+                room.put("userID", userId);
 
-                Toast.makeText(getApplicationContext(), room.toString(), Toast.LENGTH_SHORT).show();
-                System.out.println(room.toString());
                 firestore.collection("NewRoomRequest").add(room).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -331,7 +337,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
     private void showUserInfo() {
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        String userId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        userId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
 
         DocumentReference documentReference = firestore.collection("Users").document(userId);
         documentReference.addSnapshotListener(CreatePostActivity.this, new EventListener<DocumentSnapshot>() {
@@ -401,9 +407,14 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+//        TextView textView = (TextView) findViewById(R.id.eventdate);
+//        textView.setText(currentDateString);
 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = format.format(c.getTime());
         TextView textView = (TextView) findViewById(R.id.eventdate);
-        textView.setText(currentDateString);
+        textView.setText(strDate);
+
 
     }
 
