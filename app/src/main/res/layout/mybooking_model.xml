@@ -25,30 +25,39 @@
                 android:textSize="30sp"
                 android:padding="10sp"
                 android:textStyle="normal|bold"
-                android:textColor="@color/sky_blue"/>
+                android:textColor="@color/white_smoke"/>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white_smoke"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
                 android:orientation="horizontal"
-                android:padding="5dp"
-                android:layout_margin="2dp">
+                android:padding="5dp">
+
                 <TextView
                     android:id="@+id/room"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:text="Room no"
-                    android:textSize="20sp"
                     android:layout_weight="1"
-                    android:textColor="@color/sky_blue"/>
+                    android:text="Room no"
+                    android:textColor="@color/white_smoke"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
                     android:layout_weight="1"
                     android:text="time"
-                    android:textSize="20sp"
                     android:textColor="@color/sky_blue"
-                    />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
