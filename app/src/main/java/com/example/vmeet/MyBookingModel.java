@@ -1,9 +1,62 @@
 package com.example.vmeet;
 
 public class MyBookingModel {
-    private String Title;
+    private String Title,start_time, end_time,Hardwares,Softwares,AddComments,Username;
     private String Room;
-    private String time;
+    private String date;
+
+    public MyBookingModel(String title, String start_time, String end_time, String hardwares, String softwares, String addComments, String username, String room, String date) {
+        Title = title;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        Hardwares = hardwares;
+        Softwares = softwares;
+        AddComments = addComments;
+        Username = username;
+        Room = room;
+        this.date = date;
+    }
+
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getHardwares() {
+        return Hardwares;
+    }
+
+    public void setHardwares(String hardwares) {
+        Hardwares = hardwares;
+    }
+
+    public String getSoftwares() {
+        return Softwares;
+    }
+
+    public void setSoftwares(String softwares) {
+        Softwares = softwares;
+    }
+
+    public String getAddComments() {
+        return AddComments;
+    }
+
+    public void setAddComments(String addComments) {
+        AddComments = addComments;
+    }
 
     public String getTitle() {
         return Title;
@@ -13,6 +66,7 @@ public class MyBookingModel {
         Title = title;
     }
 
+
     public String getRoom() {
         return Room;
     }
@@ -21,19 +75,25 @@ public class MyBookingModel {
         Room = room;
     }
 
-    public String getTime() {
-        return time;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public MyBookingModel (String title,String time, String room)
-    {
-        this.Title = title;
-        this.Room = room;
-        this.time = time;
+    public String getUsername() {
+        return Username;
+    }
 
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    @Override
+    public String toString() {
+        return Title + "," +  start_time + "," + end_time + ","  + Hardwares + ","  + Softwares + ","  + AddComments + ","  + Username + "," + Room + "," + date;
     }
 }

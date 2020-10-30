@@ -1,6 +1,8 @@
 package com.example.vmeet;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,24 +46,46 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewH
         holder.deleteItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db = FirebaseFirestore.getInstance();
-                db.collection("Rooms").document(hwswList.get(position).getDocumentID())
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(context, "Room has been deleted. Redirecting to Homepage", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "Room has been successfully deleted!");
-                                Intent i = new Intent(context, AdminHome.class);
-                                context.startActivity(i);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error deleting document", e);
-                            }
-                        });
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                db = FirebaseFirestore.getInstance();
+                                db.collection("Rooms").document(hwswList.get(position).getDocumentID())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(context, "Room has been deleted. Redirecting to Homepage", Toast.LENGTH_LONG).show();
+                                                Log.d(TAG, "Room has been successfully deleted!");
+                                                Intent i = new Intent(context, AdminHome.class);
+                                                context.startActivity(i);
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error deleting document", e);
+                                            }
+                                        });
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                dialog.dismiss();
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Are you sure you want to delete this room?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+
 //                Intent i = new Intent(context, /* delete product Class*/);
 //
 //                Bundle b = new Bundle();

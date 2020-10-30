@@ -73,26 +73,27 @@
         android:ems="10"
         android:inputType="number" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView18"-->
-    <!--        android:layout_width="171dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginLeft="10dp"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:layout_marginRight="270dp"-->
-    <!--        android:text="Status : "-->
-    <!--        android:textColor="@color/mainText"-->
-    <!--        android:textSize="18sp"-->
-    <!--        android:textStyle="bold" />-->
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="171dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="270dp"
+        android:text="Status : "
+        android:textColor="@color/mainText"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <!--    <Spinner-->
-    <!--        android:id="@+id/SpinnerReqStatus"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:dropDownWidth="wrap_content"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        android:layout_margin="10dp"-->
-    <!--        android:spinnerMode="dropdown"/>-->
+    <Spinner
+        android:id="@+id/SpinnerReqStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dropDownWidth="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:layout_margin="10dp"
+        android:spinnerMode="dropdown"/>
 
     <TextView
         android:id="@+id/textView19"

@@ -4,18 +4,33 @@ import android.net.Uri;
 
 public class ServiceReqModel {
 
-    private String RoomNumber, description, status, userEmail;
-    private Uri url;
+    private String RoomNumber;
+    private String description;
+    private String status;
+    private String userEmail;
 
-    public ServiceReqModel(String roomNumber, String description, String status, String userEmail) {
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public ServiceReqModel(String title, String description, Uri url, String status, String userEmail) {
+    public String getDocuId() {
+        return docuId;
+    }
+
+    public void setDocuId(String docuId) {
+        this.docuId = docuId;
+    }
+
+    private String docuId;
+    private Uri url;
+
+    public ServiceReqModel(String title, String description, Uri url, String status, String userEmail, String docuId) {
         this.RoomNumber = title;
         this.description = description;
         this.url = url;
         this.status = status;
         this.userEmail = userEmail;
+        this.docuId = docuId;
     }
 
     public Uri getUrl() {

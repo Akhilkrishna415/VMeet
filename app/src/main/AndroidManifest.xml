@@ -14,6 +14,7 @@
         <activity android:name=".ServiceReqStatus"></activity>
         <activity android:name=".ReceiveServiceRequests" />
         <activity android:name=".MyBooking" />
+        <activity android:name=".BookingDetails" />
         <activity android:name=".RemoveRooms" />
         <activity android:name=".RequestMaintenance" />
         <activity android:name=".CreatePostActivity" />

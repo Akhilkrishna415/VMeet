@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8sp"
+        android:layout_margin="8sp"
         app:cardCornerRadius="8sp"
         app:cardElevation="4sp">
 
@@ -66,11 +67,12 @@
                 <ImageButton
                     android:id="@+id/deleteItem"
                     android:layout_width="0dp"
-                    android:layout_height="35sp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:layout_margin="10sp"
                     android:background="@color/white"
-                    app:srcCompat="@drawable/deletetrash" />
+                    app:srcCompat="@drawable/deletered" />
             </LinearLayout>
 
         </LinearLayout>

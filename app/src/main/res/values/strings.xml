@@ -62,6 +62,7 @@
     <string-array name="spinnerReqStatus">
         <item>Select</item>
         <item>Pending</item>
+        <item>In Progress</item>
         <item>Completed</item>
     </string-array>
 

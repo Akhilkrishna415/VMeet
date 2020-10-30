@@ -31,7 +31,7 @@
                 android:padding="10dp"
                 android:text="Service Requests"
                 android:textColor="@color/mainText"
-                android:textSize="35sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

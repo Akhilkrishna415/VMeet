@@ -124,6 +124,7 @@ public class HomeFragment extends Fragment {
 //                            System.out.println("Hello" + );
                             if (task.getResult().size() == 0) {
                                 noMeetingsText.setVisibility(View.VISIBLE);
+                                recycler.setVisibility(View.GONE);
                             } else {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     String type = (String) document.getData().get("event_Type");

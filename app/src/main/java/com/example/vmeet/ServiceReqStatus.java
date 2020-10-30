@@ -3,16 +3,27 @@ package com.example.vmeet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ServiceReqStatus extends AppCompatActivity {
 
@@ -22,7 +33,7 @@ public class ServiceReqStatus extends AppCompatActivity {
     Spinner spinStatus;
     private FirebaseUser curUser;
     private FirebaseAuth auth;
-
+    String[] progress = new String[]{"Pending", "In Progress", "Completed"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +55,17 @@ public class ServiceReqStatus extends AppCompatActivity {
         TVuseremail = findViewById(R.id.DisplayUserEmail);
 //        TVusername = findViewById(R.id.DisplayUserName);
         btnupdate = findViewById(R.id.ButtonUpdate);
-//        spinStatus = findViewById(R.id.SpinnerReqStatus);
+        spinStatus = findViewById(R.id.SpinnerReqStatus);
+
+
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinnerReqStatus, android.R.layout.simple_spinner_item);
+        final List<String> plantsList = new ArrayList<>(Arrays.asList(progress));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,plantsList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinStatus.setAdapter(adapter);
+//        spinStatus.setOnItemSelectedListener(this);
+
+
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -56,6 +77,7 @@ public class ServiceReqStatus extends AppCompatActivity {
         final String useremail = b.getString("User Email");
 //        final String username = b.getString("User Name");
         final String status = b.getString("Status");
+        final String documentID = b.getString("documentID");
 
         String[] arr = roomnumber.split(" - ");
 
@@ -64,11 +86,44 @@ public class ServiceReqStatus extends AppCompatActivity {
         TVreqtype.setText(arr[1]);
         TVroomnumber.setText(arr[0]);
         TVuseremail.setText(useremail);
+
+        if (status.equalsIgnoreCase("pending"))
+            spinStatus.setSelection(0);
+        else if (status.equalsIgnoreCase("in progress"))
+            spinStatus.setSelection(1);
+        else if (status.equalsIgnoreCase("completed"))
+            spinStatus.setSelection(2);
+
 //        TVusername.setText(username);
         btnupdate.findViewById(R.id.ButtonUpdate);
 
 
+        btnupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DocumentReference washingtonRef = db.collection("Service Requests").document(documentID);
+
+                washingtonRef
+                        .update("Status", spinStatus.getSelectedItem().toString())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Record updated successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Error updating document.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }
+        });
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

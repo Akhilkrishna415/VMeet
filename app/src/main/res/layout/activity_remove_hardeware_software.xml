@@ -32,7 +32,7 @@
                 android:padding="10dp"
                 android:text="@string/heading_rem_swHw"
                 android:textColor="@color/mainText"
-                android:textSize="35sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

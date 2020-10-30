@@ -67,30 +67,7 @@ public class MyBooking extends AppCompatActivity {
 
     private void loadinformation()
     {
-        /*
-        db = FirebaseFirestore.getInstance();
-        Log.d("nik", "Entering Home menu");
-        db.collection("NewRoomRequest")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String type = (String) document.getData().get("event_Type");
-                                String room = (String) "Room No.-  " + document.getData().get("event_room_number");
-                                String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
-                                RecycleList.add(new MyBookingModel(type, room, time));
-                                setProdItemRecycler(RecycleList);
-//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
-                            }
 
-                        } else {
-                            Log.d("", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-*/
         db = FirebaseFirestore.getInstance();
         db.collection("NewRoomRequest")
                 .whereEqualTo("userID", userId)
@@ -99,13 +76,18 @@ public class MyBooking extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-//
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    String type = (String) document.getData().get("event_Type");
                                     String room = (String) "Room No.-  " + document.getData().get("event_room_number");
-                                    String time = (String) document.getData().get("event_start_time") + " - " + document.getData().get("event_end_time");
+                                    String date = (String) document.getData().get("event_date");
+                                    String title = (String) document.getData().get("event_Type");
+                                    String start_time = (String) document.getData().get("event_start_time");
+                                    String end_time = (String) document.getData().get("event_end_time");
+                                    String hardwares = (String) document.getData().get("hardware_Requirements");
+                                    String softwares = (String) document.getData().get("software_Requirements");
+                                    String username = (String) document.getData().get("user_name");
+                                    String addComments = (String) document.getData().get("additional_comments");
                                     //String room_img_url = (String) document.getData().get("room_img_url");
-                                    RecycleList.add(new MyBookingModel(type, room, time));
+                                    RecycleList.add(new MyBookingModel(title, start_time, end_time, hardwares, softwares, addComments,  username, room, date));
                                     setProdItemRecycler(RecycleList);
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
                                 }
@@ -120,7 +102,7 @@ public class MyBooking extends AppCompatActivity {
 
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapterv2 = new MyBookingAdapter(RecycleList);
+        adapterv2 = new MyBookingAdapter(getApplicationContext(),RecycleList);
         recycler.setHasFixedSize(true);
         recycler.setAdapter(adapterv2);
         /*

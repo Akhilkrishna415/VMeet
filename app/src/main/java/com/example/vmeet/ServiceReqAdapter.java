@@ -34,6 +34,8 @@ public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqA
     public void onBindViewHolder(@NonNull ServiceReqAdapter.requestViewHolder holder, final int position) {
         holder.Tvtitle.setText(ServiceReqlist.get(position).getRoomNumber());
         holder.TvDesc.setText(ServiceReqlist.get(position).getDescription());
+        holder.statusprogress.setText(ServiceReqlist.get(position).getStatus());
+//        holder.statusprogress.setTextColor(Col);
 //       Picasso.get().load(ServiceReqlist.get(position).getUrl()).into(holder.IvReq);
         holder.IvReq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,7 @@ public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqA
                 b.putString("Description", description);
                 b.putString("Status", status);
                 b.putString("User Email", useremail);
+                b.putString("documentID",ServiceReqlist.get(position).getDocuId());
 
                 i.putExtras(b);
                 context.startActivity(i);
@@ -65,7 +68,7 @@ public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqA
 
     public class requestViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Tvtitle, TvDesc;
+        TextView Tvtitle, TvDesc,statusprogress;
         ImageView IvReq;
 
         public requestViewHolder(@NonNull View itemView) {
@@ -73,6 +76,7 @@ public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqA
             IvReq = itemView.findViewById(R.id.ReqImg);
             Tvtitle = itemView.findViewById(R.id.RoomNumber);
             TvDesc = itemView.findViewById(R.id.ReqDesc);
+            statusprogress = itemView.findViewById(R.id.statusprogress);
 
         }
     }

@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReceiveServiceRequests extends AppCompatActivity {
@@ -57,7 +58,7 @@ public class ReceiveServiceRequests extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         db.collection("Service Requests")
-                .whereEqualTo("Status", "pending")
+                .whereIn("Status", Arrays.asList("Pending", "In Progress"))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -68,7 +69,7 @@ public class ReceiveServiceRequests extends AppCompatActivity {
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData());
                                 String roomNumber = "Issue with " + (String) document.getData().get("Room Number") + " - " + document.getData().get("Request Type");
                                 String description = (String) document.getData().get("Issue Description");
-                                String status = (String) document.getData().get("status");
+                                String status = (String) document.getData().get("Status");
                                 String userEmail = (String) document.getData().get("UserEmail");
                                 String docuId = document.getId();
 
@@ -82,7 +83,7 @@ public class ReceiveServiceRequests extends AppCompatActivity {
 //                                });
 
                                 System.out.println("Sanjay Image url " + url);
-                                ServiceReqlist.add(new ServiceReqModel(roomNumber, description, url, status, userEmail));
+                                ServiceReqlist.add(new ServiceReqModel(roomNumber, description, url, status, userEmail, docuId));
                                 setreqItemRecycler(ServiceReqlist);
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + ServiceReqlist.toString());
                             }
