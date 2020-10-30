@@ -2,19 +2,15 @@ package com.example.vmeet;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,15 +36,18 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        layoutInflater = LayoutInflater.from(parent.getContext());
+//        layoutInflater = LayoutInflater.from(context);
+//
+//        View view = layoutInflater.inflate(R.layout.mybooking_model, parent, false);
+//        return new MyBookingAdapter.ViewHolder(view);
 
-        View view = layoutInflater.inflate(R.layout.mybooking_model, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.mybooking_model, parent, false);
         return new MyBookingAdapter.ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
+    public void onBindViewHolder(@NonNull MyBookingAdapter.ViewHolder holder,final int position) {
 
         holder.Title.setText(recycleModels.get(position).getTitle());
 //        holder.viewMoreInfo.setText(recycleModels.get(position).getRoom());
