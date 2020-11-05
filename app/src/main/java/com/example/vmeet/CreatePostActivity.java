@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -53,7 +54,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
     TextView sf, txtHardware;
 
 
-    EditText editTextTitle, editTextstaffID, editTextDept, eventdate, noOfPersons, editTextReason;
+    EditText editTextTitle, editTextstaffID, editTextDept, eventdate, noOfPersons, editTextReason, enterEmailId;
     TextView software, username, userDepartment, userStaffId, txthardware;
     String title, staffId, department, eventDate, startTime, endTime, roomNumber, persons, reason, event, softwareReq, hardwareReq, userId;
     Spinner eventsp, roomNoSp, stime, etime;
@@ -96,8 +97,8 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         username = findViewById(R.id.username);
         userDepartment = findViewById(R.id.userDepartment);
         userStaffId = findViewById(R.id.userStaffId);
-
         editTextReason = findViewById(R.id.editTextReason);
+        enterEmailId = findViewById(R.id.enterEmailId);
 
         showRooms();
         showUserInfo();
@@ -325,6 +326,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Booking Request has been made. Redirecting to Homepage..", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), Homepage.class));
+                            sendMail();
                         } else {
                             Toast.makeText(getApplicationContext(), "Error while booking the request. Please try again later.", Toast.LENGTH_SHORT).show();
                         }
@@ -333,6 +335,20 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
             }
         });
+    }
+
+    private void sendMail() {
+        try {
+            String mEmail = enterEmailId.getText().toString();
+            String mSubject = "Update about " + event;
+            String mMessage = "You Have Scheduled an " + event + " start's at " + startTime + " to " + endTime + " on " + eventDate;
+
+            GMailSender gMailSender = new GMailSender(this, mEmail, mSubject, mMessage);
+            gMailSender.execute();
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
+
     }
 
     private void showUserInfo() {

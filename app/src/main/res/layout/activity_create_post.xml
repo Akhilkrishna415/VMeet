@@ -484,11 +484,12 @@
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
+
                             <EditText
                                 android:id="@+id/editTextReason"
                                 android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="10sp"
+                                android:layout_height="45dp"
+                                android:layout_margin="5sp"
                                 android:ems="10"
                                 android:gravity="top"
                                 android:hint="Start typing here..."
@@ -496,6 +497,29 @@
                                 android:minLines="3"
                                 android:padding="5dp"
                                 android:textColorHint="@color/rosy_brown" />
+
+                            <TextView
+                                android:id="@+id/emailid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:padding="10dp"
+                                android:text="Enter Email:"
+                                android:textColor="@color/mainText"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/enterEmailId"
+                                android:layout_width="397dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:hint="Enter Email For Confirmation"
+                                android:inputType="textEmailAddress"
+                                android:padding="10dp" />
 
                             <Button
                                 android:id="@+id/btnsubmit"
