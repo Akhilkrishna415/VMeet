@@ -71,13 +71,14 @@ public class MyBooking extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         db.collection("NewRoomRequest")
                 .whereEqualTo("userID", userId)
+                .whereEqualTo("Active", true)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String room = (String) "Room No.-  " + document.getData().get("event_room_number");
+                                String room = (String) document.getData().get("event_room_number");
                                 String date = (String) document.getData().get("event_date");
                                 String title = (String) document.getData().get("event_Type");
                                 String start_time = (String) document.getData().get("event_start_time");
@@ -86,8 +87,9 @@ public class MyBooking extends AppCompatActivity {
                                 String softwares = (String) document.getData().get("software_Requirements");
                                 String username = (String) document.getData().get("user_name");
                                 String addComments = (String) document.getData().get("additional_comments");
+                                String documentID = (String) document.getId();
                                 //String room_img_url = (String) document.getData().get("room_img_url");
-                                RecycleList.add(new MyBookingModel(title, start_time, end_time, hardwares, softwares, addComments,  username, room, date));
+                                RecycleList.add(new MyBookingModel(title, start_time, end_time, hardwares, softwares, addComments,  username, room, date,documentID));
                                 setProdItemRecycler(RecycleList);
 //                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + RecycleList.toString());
                             }

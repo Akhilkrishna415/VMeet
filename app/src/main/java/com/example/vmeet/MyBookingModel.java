@@ -1,11 +1,21 @@
 package com.example.vmeet;
 
 public class MyBookingModel {
-    private String Title,start_time, end_time,Hardwares,Softwares,AddComments,Username;
+    private String Title;
+    private String start_time;
+    private String end_time;
+    private String Hardwares;
+    private String Softwares;
+    private String AddComments;
+    private String Username;
+
+
+
+    private String documentID;
     private String Room;
     private String date;
 
-    public MyBookingModel(String title, String start_time, String end_time, String hardwares, String softwares, String addComments, String username, String room, String date) {
+    public MyBookingModel(String title, String start_time, String end_time, String hardwares, String softwares, String addComments, String username, String room, String date, String documentID) {
         Title = title;
         this.start_time = start_time;
         this.end_time = end_time;
@@ -15,6 +25,7 @@ public class MyBookingModel {
         Username = username;
         Room = room;
         this.date = date;
+        this.documentID = documentID;
     }
 
 
@@ -92,8 +103,16 @@ public class MyBookingModel {
         Username = username;
     }
 
+    public String getDocumentID() {
+        return documentID;
+    }
+
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
+
     @Override
     public String toString() {
-        return Title + "," +  start_time + "," + end_time + ","  + Hardwares + ","  + Softwares + ","  + AddComments + ","  + Username + "," + Room + "," + date;
+        return Title + "," +  start_time + "," + end_time + ","  + Hardwares + ","  + Softwares + ","  + AddComments + ","  + Username + "," + Room + "," + date + "," + documentID;
     }
 }

@@ -128,7 +128,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                                         gfg.length,
                                         String[].class);
                                 listSoftware = str;
-                                checkeditems = new boolean[listSoftware.length];
+                                checkeditems = new boolean[listSoftware.length ];
                             }
                         }
                     }
@@ -218,7 +218,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View v) {
                 AlertDialog.Builder hBuiler = new AlertDialog.Builder(CreatePostActivity.this);
                 hBuiler.setTitle("Available Hardware");
-                hBuiler.setMultiChoiceItems(listHardware, checkeditems, new DialogInterface.OnMultiChoiceClickListener() {
+                hBuiler.setMultiChoiceItems(listHardware, hcheckeditems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int position, boolean isChecked) {
                         if (isChecked) {
@@ -298,7 +298,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String getCurrentDate = sdf.format(cal.getTime());
-
+                boolean isActive = true;
 
                 //submit
                 Map<String, Object> room = new HashMap<>();
@@ -317,6 +317,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                 room.put("room_img_url", room_uri);
                 room.put("created_at", getCurrentDate);
                 room.put("userID", userId);
+                room.put("Active", isActive);
 
                 firestore.collection("NewRoomRequest").add(room).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

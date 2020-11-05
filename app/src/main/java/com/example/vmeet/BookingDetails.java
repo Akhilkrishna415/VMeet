@@ -1,25 +1,41 @@
 package com.example.vmeet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.List;
+
+import static com.example.vmeet.Login.TAG;
 
 public class BookingDetails extends AppCompatActivity {
 
     FirebaseFirestore db;
     TextView User, Date, Title, StartTime, EndTime, RoomNo, ImgUrl, Hardware, SoftWare, Comments;
-    Spinner spinStatus;
+    Button CancelBooking;
     private FirebaseUser curUser;
     private FirebaseAuth auth;
+    List<MyBookingModel> hwswList;
+    String documentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +52,7 @@ public class BookingDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*Toolbar configuration and back button End */
 
+        CancelBooking = findViewById(R.id.CancelBook);
         User = findViewById(R.id.ShowId);
         Date = findViewById(R.id.ShowDate);
         Title = findViewById(R.id.ShowTitle);
@@ -51,7 +68,8 @@ public class BookingDetails extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         final Bundle b = getIntent().getExtras();
         String[] getBookingDetail = b.getString("getBookingDetail").split(",");
-//         Title + "," +  start_time + "," + end_time + ","  + Hardwares + ","  + Softwares + ","  + AddComments + ","  + Username + "," + Room + "," + date;
+//         Title + "," +  start_time + "," + end_time + ","  + Hardwares + ","  + Softwares + ","
+//         + AddComments + ","  + Username + "," + Room + "," + date;
 //        final String FUser = b.getString("user_name");
 //        final String FTitle = b.getString("event_Type");
 //        final String FRoomno = b.getString("event_room_number");
@@ -72,10 +90,11 @@ public class BookingDetails extends AppCompatActivity {
         User.setText(getBookingDetail[6]);
         RoomNo.setText(getBookingDetail[7]);
         Date.setText(getBookingDetail[8]);
-
+        documentID = getBookingDetail[9];
 
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -89,5 +108,49 @@ public class BookingDetails extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void Cancel(View view) {
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        final int position = 0;
+                        db = FirebaseFirestore.getInstance();
+                        DocumentReference reference = db.collection("NewRoomRequest").document(documentID);
+                        reference.update("Active", false)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Intent intent = new Intent(getApplicationContext(), MyBooking.class);
+                                        Toast.makeText(getApplicationContext(), "Booking has been canceled successfully.", Toast.LENGTH_SHORT).show();
+                                        startActivity(intent);
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error updating document", e);
+                                    }
+                                });
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to cancel this booking?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+
+
     }
 }

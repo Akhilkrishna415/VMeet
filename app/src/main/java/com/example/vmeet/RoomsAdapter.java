@@ -55,7 +55,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewH
                                 //Yes button clicked
                                 db = FirebaseFirestore.getInstance();
                                 db.collection("Rooms").document(hwswList.get(position).getDocumentID())
-                                        .delete()
+                                        .delete()//update an
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
