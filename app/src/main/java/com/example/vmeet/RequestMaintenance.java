@@ -67,7 +67,7 @@ public class RequestMaintenance extends AppCompatActivity implements AdapterView
                 user.put("Room Number", RoomNo);
                 user.put("Request Type", ReqType);
                 user.put("Issue Description", Desc);
-                user.put("Status", "pending");
+                user.put("Status", "Pending");
                 user.put("Username", username);
                 user.put("UserEmail", userEmail);
                 user.put("created_By",userID);

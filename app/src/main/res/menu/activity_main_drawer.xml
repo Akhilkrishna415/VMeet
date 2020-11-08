@@ -20,6 +20,10 @@
             android:id="@+id/nav_requestservice"
             android:icon="@drawable/requestservicenew"
             android:title="@string/request_service" />
+        <item
+            android:id="@+id/nav_myservicereqsts"
+            android:icon="@drawable/requestservice"
+            android:title="@string/my_service_requests" />
         <item android:title="More">
             <menu>
                 <item
