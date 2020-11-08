@@ -1,21 +1,24 @@
 package com.example.vmeet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * This class manages the splash screen functionality
+ */
 public class SplashActivity extends AppCompatActivity {
-   Window win;
+    Window win;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        win=this.getWindow();
+        win = this.getWindow();
 
 
         new Handler().postDelayed(new Runnable() {

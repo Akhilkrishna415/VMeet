@@ -113,6 +113,8 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
 
 
+        //Display available software from the database to dialogue builder
+
         btnSoftware = (Button) findViewById(R.id.btnsoftware);
         software = (TextView) findViewById(R.id.software);
         final ArrayList<String> arrSoftware = new ArrayList<String>();
@@ -190,7 +192,8 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
 
 
-        //hardware
+        //Display available Hardware from the database to dialogue builder
+
         btnHardware = (Button) findViewById(R.id.btnHardware);
         txtHardware = (TextView) findViewById(R.id.txthardware);
         final ArrayList<String> arrHardware = new ArrayList<String>();
@@ -337,6 +340,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    /**
+     * This method used to send email comfirmation about event
+     */
     private void sendMail() {
         try {
             String mEmail = enterEmailId.getText().toString();
@@ -351,6 +357,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
     }
 
+    /**
+     * This method shows the user information stored in the firestoe to console
+     */
     private void showUserInfo() {
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -377,6 +386,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    /**
+     * This method used to show the rooms from database  added by the admin
+     */
     private void showRooms() {
         CollectionReference subjectsRef = firestore.collection("Rooms");
 
@@ -416,7 +428,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
-
+    /**
+     * Calendar Date picker
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();

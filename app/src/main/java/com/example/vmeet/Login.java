@@ -16,11 +16,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+
+/**
+ * This class manages user authentication
+ */
+
 public class Login extends AppCompatActivity {
     Button btnlogin;
     public static final String TAG = "TAG";
     TextView goToRegister, forgotPassword;
-    EditText email,password;
+    EditText email, password;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -56,6 +62,7 @@ public class Login extends AppCompatActivity {
             }
         };
 
+        //Login Button:Checks the username and paswod from database and redirects to home page
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,12 +73,10 @@ public class Login extends AppCompatActivity {
                 if (emailText.isEmpty()){
                     email.setError("Please enter the email ID");
                     email.requestFocus();
-                }
-                else if (pass.isEmpty()){
+                } else if (pass.isEmpty()){
                     password.setError("Please enter the password");
                     password.requestFocus();
-                }
-                else if (emailText.isEmpty() && pass.isEmpty()){
+                } else if (emailText.isEmpty() && pass.isEmpty()){
                     Toast.makeText(Login.this,"Fields are Empty!",Toast.LENGTH_SHORT).show();
                 }else {
                     mAuth.signInWithEmailAndPassword(emailText, pass)
@@ -92,26 +97,29 @@ public class Login extends AppCompatActivity {
                                             i = new Intent(getApplicationContext(), Homepage.class);
                                         }
                                         startActivity(i);
-//                                    updateUI(user);
+//
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.d(TAG, "signInWithEmail:failure", task.getException());
                                         Toast.makeText(Login.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
-//                                    updateUI(null);
+//
                                     }
                                 }
                             });
                 }
             }
         });
-        goToRegister.setOnClickListener(new View.OnClickListener(){
+        //Redirects to Signup Activity
+        goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(i);
             }
         });
+
+        //Redirects to Reset Activity
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +134,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(mAuth != null)
-        mAuth.addAuthStateListener(mAuthStateListener);
+            mAuth.addAuthStateListener(mAuthStateListener);
     }
 
 }

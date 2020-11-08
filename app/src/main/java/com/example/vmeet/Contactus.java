@@ -1,15 +1,17 @@
 package com.example.vmeet;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+/**
+ * This class manages how to contact vmeet team via mail or call
+ */
 public class Contactus extends AppCompatActivity {
 
     @Override
@@ -42,21 +44,25 @@ public class Contactus extends AppCompatActivity {
         }
     }
 
-    public void call(View view)
-    {
+    /**
+     * This class manages to call the dedicated customer care number
+     */
+    public void call(View view) {
         Intent call = new Intent(Intent.ACTION_DIAL);
         call.setData(Uri.parse("tel:5135699966"));
         startActivity(call);
     }
 
-    public void Mail(View view)
-    {
+    /**
+     * This class manages to send mail to dedicated Vmeet team gmail Id
+     */
+    public void Mail(View view) {
         Intent Mail = new Intent(Intent.ACTION_SEND);
-        String[] recipients={"mailto@gmail.com"};
+        String[] recipients = {"mailto@gmail.com"};
         Mail.putExtra(Intent.EXTRA_EMAIL, recipients);
-        Mail.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
-        Mail.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
-        Mail.putExtra(Intent.EXTRA_CC,"secondcupcafemontreal@gmail.com");
+        Mail.putExtra(Intent.EXTRA_SUBJECT, "Subject text here...");
+        Mail.putExtra(Intent.EXTRA_TEXT, "Body of the content here...");
+        Mail.putExtra(Intent.EXTRA_CC, "secondcupcafemontreal@gmail.com");
         Mail.setType("text/html");
         Mail.setPackage("com.google.android.gm");
         startActivity(Intent.createChooser(Mail, "Send mail"));

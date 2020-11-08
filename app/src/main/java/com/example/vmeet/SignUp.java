@@ -26,11 +26,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * This class manages user SignUp
+ */
+
 public class SignUp extends AppCompatActivity {
     public static final String TAG = "TAG";
     TextView userExist;
     Button btnReg;
-    EditText etemail, etpwd, etphone, etstaffid, etdpart, etdesign,etName;
+    EditText etemail, etpwd, etphone, etstaffid, etdpart, etdesign, etName;
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore fstore;
     String userID;
