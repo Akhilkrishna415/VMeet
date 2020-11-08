@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +28,7 @@ public class Feedback extends AppCompatActivity {
     public static final String TAG = "TAG";
     Button btnfeedback,btnratenow;
     EditText et_feedback;
+    RatingBar et_rating;
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore db;
     String UserID;
@@ -35,12 +37,12 @@ public class Feedback extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-
         db = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
         btnfeedback = findViewById(R.id.btnsubmit);
         et_feedback = findViewById(R.id.edittextfeedback);
-        btnratenow=findViewById(R.id.btnGet);
+        et_rating=findViewById(R.id.ratingBar1);
+        //btnratenow=findViewById(R.id.btnGet);
 
         /*Toolbar configuration and back button start */
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,17 +54,13 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*Toolbar configuration and back button End */
 
-        btnratenow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Feedback.this, "Thankyou for your rating!", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
 
         btnfeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Float value =et_rating.getRating();
                 final String feedback = et_feedback.getText().toString();
                 String username = mFirebaseAuth.getCurrentUser().getDisplayName();
                 String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
@@ -70,6 +68,7 @@ public class Feedback extends AppCompatActivity {
                 DocumentReference documentReference = db.collection("Feedback").document(UserID);
                 Map<String, Object> user = new HashMap<>();
                 user.put("User Feedback", feedback);
+                user.put("User Rating", value);
                 user.put("Username", username);
                 user.put("UserEmail", userEmail);
                 user.put("User ID",UserID);
