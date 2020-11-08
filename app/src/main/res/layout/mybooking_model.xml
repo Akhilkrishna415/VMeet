@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +11,7 @@
         android:layout_height="120sp"
         android:layout_margin="8dp"
         android:padding="6dp"
-        android:elevation="8sp"
+        android:elevation="10sp"
         app:cardCornerRadius="6sp">
 
         <LinearLayout
@@ -21,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/slate_gray"
+                android:background="@drawable/bordercolor"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -30,32 +31,86 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingLeft="10sp"
+                        android:paddingTop="10sp"
+                        android:text="Meeting Type"
+                        android:textColor="@color/maroon" />
+
+                    <TextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10sp"
                         android:paddingLeft="10sp"
                         android:text="Title"
-                        android:textColor="@color/white_smoke"
-                        android:textSize="30sp"
+                        android:textColor="@color/green"
+                        android:textSize="22sp"
                         android:textStyle="normal|bold" />
 
                     <View
                         android:id="@+id/divider3"
                         android:layout_width="match_parent"
-                        android:layout_height="1.5dp"
-                        android:background="@color/white_smoke" />
+                        android:layout_height="1dp"
+                        android:background="@color/mainText" />
 
-                    <TextView
-                        android:id="@+id/Date"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="date"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="8sp"
+                            android:text="When:"
+                            android:textColor="@color/maroon"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/Date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="8sp"
+                            android:text="date"
+                            android:textColor="@color/green"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlSymmetry" />
+
+                        <View
+                            android:id="@+id/divider5"
+                            android:layout_width="1.5dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/tea1" />
+
+                        <TextView
+                            android:id="@+id/where"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="8sp"
+                            android:text="Where:"
+                            android:textColor="@color/maroon"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/idRoomNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="8sp"
+                            android:text="date"
+                            android:textColor="@color/green"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -64,8 +119,7 @@
             <LinearLayout
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_weight="2">
 
                 <ImageView
                     android:id="@+id/ViewMoreInfo"

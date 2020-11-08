@@ -50,7 +50,7 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
     public void onBindViewHolder(@NonNull MyBookingAdapter.ViewHolder holder,final int position) {
 
         holder.Title.setText(recycleModels.get(position).getTitle());
-//        holder.viewMoreInfo.setText(recycleModels.get(position).getRoom());
+        holder.roomNum.setText(recycleModels.get(position).getRoom());
         holder.date.setText(recycleModels.get(position).getDate());
 
         holder.viewMoreInfo.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView Title;
+        TextView Title, roomNum;
         TextView date;
         ImageView viewMoreInfo;
 
@@ -93,6 +93,7 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
             super(itemView);
             Title = itemView.findViewById(R.id.title);
             date = itemView.findViewById(R.id.Date);
+            roomNum = itemView.findViewById(R.id.idRoomNum);
             viewMoreInfo = itemView.findViewById(R.id.ViewMoreInfo);
         }
 

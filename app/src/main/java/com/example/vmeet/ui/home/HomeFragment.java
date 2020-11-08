@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
     private void loadInformation() {
         db.collection("NewRoomRequest")
                 .whereEqualTo("userID", userId)
-                .whereEqualTo("created_at", getCurrentDate)
+                .whereEqualTo("event_date", getCurrentDate)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -145,7 +145,7 @@ public class HomeFragment extends Fragment {
 
         //Other meetings today
         db.collection("NewRoomRequest")
-                .whereEqualTo("created_at", getCurrentDate)
+                .whereEqualTo("event_date", getCurrentDate)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
