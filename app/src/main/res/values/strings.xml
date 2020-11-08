@@ -40,6 +40,7 @@
     <string name="AppName"><font color="#008080"><span style="background_color:'#81b5a1'">VMeet</span></font></string>
     <string name="contact_support_text">Queries?</string>
     <string name="contact_support_text2">Please contact our supporting team</string>
+    <string name="my_service_requests"><font color="#008080"><b>My Service Requests</b></font></string>
     <string-array name="adminHardwareSoftware">
         <item>Select..</item>
         <item>Hardware</item>

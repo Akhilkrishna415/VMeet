@@ -157,6 +157,11 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 drawer.animate();
                 startActivity(new Intent(Homepage.this, RequestMaintenance.class));
                 break;
+            case R.id.nav_myservicereqsts:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, MyServiceRequests.class));
+                break;
         }
         return true;
     }

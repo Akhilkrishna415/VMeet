@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqAdapter.requestViewHolder> {
+public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqAdapter.requestViewHolder> {
     Context context;
     List<ServiceReqModel> ServiceReqlist;
 

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ServiceReqStatus"></activity>
+        <activity android:name=".MyServiceRequests"></activity>
+        <activity android:name=".ServiceReqStatus" />
         <activity android:name=".ReceiveServiceRequests" />
         <activity android:name=".MyBooking" />
         <activity android:name=".BookingDetails" />
