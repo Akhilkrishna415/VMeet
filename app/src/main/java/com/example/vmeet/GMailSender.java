@@ -37,13 +37,13 @@ public class GMailSender extends AsyncTask<Void, Void, Void> {
 
         session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("surya.pasumarthi111@gmail.com", "vwjxhkcrzpwmavxk");
+                return new PasswordAuthentication("vmeetinfo@gmail.com", "ivgsbmgvaspffykm");
             }
         });
 
         MimeMessage mimeMessage = new MimeMessage(session);
         try {
-            mimeMessage.setFrom(new InternetAddress("surya.pasumarthi111@gmail.com"));
+            mimeMessage.setFrom(new InternetAddress("vmeetinfo@gmail.com"));
             mimeMessage.addRecipients(Message.RecipientType.TO, String.valueOf(new InternetAddress(email)));
             mimeMessage.setSubject(subject);
             mimeMessage.setText(message);

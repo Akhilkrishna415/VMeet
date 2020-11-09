@@ -347,7 +347,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         try {
             String mEmail = enterEmailId.getText().toString();
             String mSubject = "Update about " + event;
-            String mMessage = "You Have Scheduled an " + event + " start's at " + startTime + " to " + endTime + " on " + eventDate;
+            String mMessage = "You Have Scheduled an " + event + " start's at " + startTime + " to " + endTime + " on " + eventDate + "in room number" + roomNumber + "in CEGEP DE LA GASPESIE ET DES ILES, Montreal Campus";
 
             GMailSender gMailSender = new GMailSender(this, mEmail, mSubject, mMessage);
             gMailSender.execute();
