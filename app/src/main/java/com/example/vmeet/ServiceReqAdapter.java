@@ -35,8 +35,6 @@ public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReq
         holder.Tvtitle.setText(ServiceReqlist.get(position).getRoomNumber());
         holder.TvDesc.setText(ServiceReqlist.get(position).getDescription());
         holder.statusprogress.setText(ServiceReqlist.get(position).getStatus());
-//        holder.statusprogress.setTextColor(Col);
-//       Picasso.get().load(ServiceReqlist.get(position).getUrl()).into(holder.IvReq);
         holder.IvReq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

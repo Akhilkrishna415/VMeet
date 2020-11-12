@@ -52,7 +52,11 @@ public class ReceiveServiceRequests extends AppCompatActivity {
         loadServiceRequests();
     }
 
-
+    /*
+     * Load all the service requests which are in pending and In Progress
+     * so that the admin can update the status for the respective.
+     * @params: none
+     * */
     private void loadServiceRequests() {
 
         db = FirebaseFirestore.getInstance();

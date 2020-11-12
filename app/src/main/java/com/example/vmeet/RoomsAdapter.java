@@ -85,28 +85,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewH
                 builder.setMessage("Are you sure you want to delete this room?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
-
-//                Intent i = new Intent(context, /* delete product Class*/);
-//
-//                Bundle b = new Bundle();
-//
-//
-//                String name = breakfastlist.get(position).getTitle();
-//                String price = breakfastlist.get(position).getPrice();
-////                String image = breakfastlist.get(position).getImageURL();
-//
-//
-//                b.putString("Name", name);
-//                b.putString("Price", price);
-////                b.putString("Image", String.valueOf(image));
-//
-//
-//                i.putExtras(b);
-//                context.startActivity(i/*, activityOptions.toBundle()*/);
-
             }
         });
-//        holder.versionText.setText(hwswList.get(position).getPrice() + " $");
     }
 
 

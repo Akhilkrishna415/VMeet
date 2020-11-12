@@ -98,6 +98,10 @@ public class ServiceReqStatus extends AppCompatActivity {
         btnupdate.findViewById(R.id.ButtonUpdate);
 
 
+        /*
+         * Method to Update the service status for the maintenance Request page functionality takes the parameters from the xml
+         * and created a record in Firestore Users table
+         * */
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

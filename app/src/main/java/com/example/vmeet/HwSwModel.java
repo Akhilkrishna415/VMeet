@@ -6,6 +6,12 @@ public class HwSwModel {
     private String documentID;
     private boolean isActive;
 
+    /**
+     * @param title
+     * @param version
+     * @param documentID
+     * @param isActive
+     */
     public HwSwModel(String title, String version, String documentID, boolean isActive) {
         this.title = title;
         this.version = version;

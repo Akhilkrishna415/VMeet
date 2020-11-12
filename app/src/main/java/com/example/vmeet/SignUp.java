@@ -63,6 +63,11 @@ public class SignUp extends AppCompatActivity {
         getSupportActionBar().setTitle("Registration");
         /*Toolbar configuration and back button End */
 
+        /*
+         * Method to signup functionality takes the parameters from the xml
+         * and created a record in Firestore Users table
+         * */
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

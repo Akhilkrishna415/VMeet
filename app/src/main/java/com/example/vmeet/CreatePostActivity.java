@@ -2,13 +2,17 @@ package com.example.vmeet;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -47,6 +51,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.google.firebase.firestore.FieldValue.serverTimestamp;
+
 public class CreatePostActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
@@ -58,6 +64,10 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
     TextView software, username, userDepartment, userStaffId, txthardware;
     String title, staffId, department, eventDate, startTime, endTime, roomNumber, persons, reason, event, softwareReq, hardwareReq, userId;
     Spinner eventsp, roomNoSp, stime, etime;
+    int startTimeValue, endTimeValue;
+    boolean isAllValid;
+    String tempurlString, room_uri;
+
 
     String[] listSoftware, listHardware;
     boolean[] checkeditems, hcheckeditems;
@@ -114,7 +124,6 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
 
         //Display available software from the database to dialogue builder
-
         btnSoftware = (Button) findViewById(R.id.btnsoftware);
         software = (TextView) findViewById(R.id.software);
         final ArrayList<String> arrSoftware = new ArrayList<String>();
@@ -136,7 +145,6 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                         }
                     }
                 });
-        //listSoftware=getResources().getStringArray(R.array.Software);
 
 
         btnSoftware.setOnClickListener(new View.OnClickListener() {
@@ -277,7 +285,7 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                isAllValid = true;
                 title = username.getText().toString();
                 department = userDepartment.getText().toString();
                 staffId = userStaffId.getText().toString();
@@ -291,53 +299,168 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                 hardwareReq = txtHardware.getText().toString();
                 persons = noOfPersons.getText().toString();
                 reason = editTextReason.getText().toString();
-                String tempurlString = subjectswithRooms.get(roomNoSp.getSelectedItemPosition());
+                tempurlString = subjectswithRooms.get(roomNoSp.getSelectedItemPosition());
                 String[] room_url = tempurlString.split(",,");
 //                Toast.makeText(getApplicationContext(),room_url[1], Toast.LENGTH_SHORT).show();
-                String room_uri = "";
+                room_uri = "";
                 if (!room_url[1].isEmpty()) {
                     room_uri = room_url[1];
                 }
 
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String getCurrentDate = sdf.format(cal.getTime());
-                boolean isActive = true;
 
-                //submit
-                Map<String, Object> room = new HashMap<>();
-                room.put("user_name", title);
-                room.put("user_staffId", staffId);
-                room.put("user_department", department);
-                room.put("event_Type", event);
-                room.put("event_date", eventDate);
-                room.put("event_start_time", startTime);
-                room.put("event_end_time", endTime);
-                room.put("event_room_number", roomNumber);
-                room.put("software_Requirements", softwareReq);
-                room.put("hardware_Requirements", hardwareReq);
-                room.put("no_Of_Attendees", persons);
-                room.put("additional_comments", reason);
-                room.put("room_img_url", room_uri);
-                room.put("created_at", getCurrentDate);
-                room.put("userID", userId);
-                room.put("Active", isActive);
+                startTimeValue = returnTimeValidNumber(stime.getSelectedItem().toString());
+                endTimeValue = returnTimeValidNumber(etime.getSelectedItem().toString());
 
-                firestore.collection("NewRoomRequest").add(room).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Booking Request has been made. Redirecting to Homepage..", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), Homepage.class));
-                            sendMail();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Error while booking the request. Please try again later.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+                if (startTime.isEmpty() || endTime.isEmpty() || eventDate.isEmpty() || persons.isEmpty() || reason.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please make sure you entered all the required values.", Toast.LENGTH_SHORT).show();
+                } else if (startTimeValue >= endTimeValue) {
+                    Toast.makeText(getApplicationContext(), "Invalid Start time and End time. Please select appropriate values. " + endTimeValue, Toast.LENGTH_SHORT).show();
+                    TextView errorText = (TextView) stime.getSelectedView();
+                    errorText.setError("");
+                    errorText.setTextColor(Color.RED);//just to highlight that this is an error
+
+                } else {
+
+                    firestore.collection("NewRoomRequest")
+                            .whereEqualTo("event_room_number", roomNumber)
+                            .whereEqualTo("event_date", eventDate)
+//                            .whereGreaterThanOrEqualTo("eventStartTimeInNumber", startTimeValue)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), "task.getResult().size() :  " + task.getResult().size(), Toast.LENGTH_SHORT).show();
+
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            if (document != null && document.exists()) {
+
+                                                Log.d("sanjay", "Date :  " + eventDate
+                                                        + "selectedTime ===> " + startTimeValue
+                                                        + "eventStartTimeInNumber ===> " + document.getData().get("eventStartTimeInNumber")
+                                                        + "eventEndTimeInNumber ===> " + document.getData().get("eventEndTimeInNumber")
+                                                        + " ==> ", task.getException());
+                                                int recordStartTime = Integer.parseInt(document.getData().get("eventStartTimeInNumber").toString());
+                                                int recordEndTime = Integer.parseInt(document.getData().get("eventEndTimeInNumber").toString());
+
+
+                                                if ((startTimeValue > recordStartTime) && (startTimeValue < recordEndTime)) {
+
+                                                    Toast.makeText(getApplicationContext(), "Existing event please change the timings", Toast.LENGTH_SHORT).show();
+//                                                    Log.d("sanjay", "Entering first IF: ", task.getException());
+                                                    isAllValid = false;
+                                                    break;
+                                                } else if ((startTimeValue <= recordStartTime)) {
+                                                    if ((endTimeValue > recordStartTime) && (endTimeValue < recordEndTime)) {
+                                                        Toast.makeText(getApplicationContext(), "Existing event please change the timings", Toast.LENGTH_SHORT).show();
+//                                                        Log.d("sanjay", "Entering second IF: ", task.getException());
+                                                        isAllValid = false;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+
+
+//                                            Toast.makeText(getApplicationContext(), "Existing event please change the timings" + document.getData(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        //submit if only all validations have passed successfully..
+                                        if (isAllValid) {
+
+                                            boolean isActive = true;
+
+                                            Calendar cal = Calendar.getInstance();
+                                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                            String getCurrentDate = sdf.format(cal.getTime());
+
+                                            Map<String, Object> room = new HashMap<>();
+                                            room.put("user_name", title);
+                                            room.put("user_staffId", staffId);
+                                            room.put("user_department", department);
+                                            room.put("event_Type", event);
+                                            room.put("event_date", eventDate);
+                                            room.put("event_start_time", startTime);
+                                            room.put("event_end_time", endTime);
+                                            room.put("event_room_number", roomNumber);
+                                            room.put("software_Requirements", softwareReq);
+                                            room.put("hardware_Requirements", hardwareReq);
+                                            room.put("no_Of_Attendees", persons);
+                                            room.put("additional_comments", reason);
+                                            room.put("room_img_url", room_uri);
+                                            room.put("Active", isActive);
+                                            room.put("created_at", getCurrentDate);
+                                            room.put("created_timestamp", serverTimestamp());
+                                            room.put("userID", userId);
+                                            room.put("eventStartTimeInNumber", startTimeValue);
+                                            room.put("eventEndTimeInNumber", endTimeValue);
+                                            Toast.makeText(getApplicationContext(), "Booking Request has been made. Redirecting to Homepage..", Toast.LENGTH_LONG).show();
+                                            firestore.collection("NewRoomRequest").add(room).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getApplicationContext(), "Booking Request has been made. Redirecting to Homepage..", Toast.LENGTH_LONG).show();
+                                                        startActivity(new Intent(getApplicationContext(), Homepage.class));
+                                                        sendMail();
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "Error while booking the request. Please try again later.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+
+                                    } else {
+                                        Log.d("sanjay", "Error getting documents: ", task.getException());
+                                    }
+
+                                }
+                            });
+                    Log.d("sanjay", "Error getting documents: " + isAllValid);
+                }
+
 
             }
         });
+    }
+
+    private int returnTimeValidNumber(String stEndTime) {
+
+        switch (stEndTime) {
+            case "9:00 AM":
+                return 900;
+            case "9:30 AM":
+                return 950;
+            case "10:00 AM":
+                return 1000;
+            case "10:30 AM":
+                return 1050;
+            case "11:00 AM":
+                return 1100;
+            case "11:30 AM":
+                return 1150;
+            case "12:00 PM":
+                return 1200;
+            case "12:30 PM":
+                return 1250;
+            case "01:00 PM":
+                return 1300;
+            case "01:30 PM":
+                return 1350;
+            case "02:00 PM":
+                return 1400;
+            case "2:30 PM":
+                return 1450;
+            case "3:00 PM":
+                return 1500;
+            case "3:30 PM":
+                return 1550;
+            case "4:00 PM":
+                return 1600;
+            case "4:30 PM":
+                return 1650;
+        }
+
+        return 0;
     }
 
     /**

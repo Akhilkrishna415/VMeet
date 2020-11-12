@@ -37,15 +37,6 @@ public class MyBooking extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
 
-   /* String[] MeetingTitle = {"MAD315 exam", "CST 2020 Orientation","MAD415 Orientation","CST 2019 Workshop","Meeting with Student"};
-    String[] RoomNo = {"205", "103","104","113","94"};
-    String[] Timev2 = {"11:00 AM", "1:30 PM","2:30 PM","4:00 PM","5:30 PM"};
-
-    */
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,14 +98,7 @@ public class MyBooking extends AppCompatActivity {
         adapterv2 = new MyBookingAdapter(this,RecycleList);
         recycler.setHasFixedSize(true);
         recycler.setAdapter(adapterv2);
-        /*
-        //Other meetings recycler view adapter
-        adapterv2 = new AppAdapter(RecycleList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapterv2);
 
-         */
     }
 
     @Override

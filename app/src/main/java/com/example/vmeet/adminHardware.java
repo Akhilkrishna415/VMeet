@@ -82,7 +82,11 @@ public class adminHardware extends AppCompatActivity {
             }
         });
 
-
+        /*
+         * Create a new Room in to the Rooms table in Firestore DB.
+         * get the Room Number , Floor and Request Type from the xml
+         * @params: none
+         * */
         btnaddRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,10 +140,17 @@ public class adminHardware extends AppCompatActivity {
         }
     }
 
+    /**
+     * Create a new image url to the Firestore Storage DB.
+     * get the title , version and Request Type from the xml
+     *
+     * @param imageUri
+     */
+
     private void uploadImagetoFirebase(Uri imageUri) {
         //upload image to firebase storage
 
-        final StorageReference fileref = storageReference.child("Room/" +roomnum.getText().toString() + "/"+roomnum.getText().toString()+"room.jpg");
+        final StorageReference fileref = storageReference.child("Room/" + roomnum.getText().toString() + "/" + roomnum.getText().toString() + "room.jpg");
         fileref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -154,7 +165,7 @@ public class adminHardware extends AppCompatActivity {
                                 imageURI=task.getResult().toString();
                                 Log.i("URL",imageURI);
                             }
-                            });
+                        });
                     }
                 });
             }

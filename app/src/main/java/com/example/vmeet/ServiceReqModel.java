@@ -24,6 +24,14 @@ public class ServiceReqModel {
     private String docuId;
     private Uri url;
 
+    /**
+     * @param title
+     * @param description
+     * @param url
+     * @param status
+     * @param userEmail
+     * @param docuId
+     */
     public ServiceReqModel(String title, String description, Uri url, String status, String userEmail, String docuId) {
         this.RoomNumber = title;
         this.description = description;

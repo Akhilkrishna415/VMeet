@@ -44,10 +44,10 @@ public class MyServiceRequests extends AppCompatActivity {
         setContentView(R.layout.activity_my_service_requests);
         mAuth = FirebaseAuth.getInstance();
         created_By = mAuth.getCurrentUser().getUid();
-        noservicereqText = (TextView) findViewById(R.id.noservicereqsText);
+        noservicereqText = findViewById(R.id.noservicereqsText);
 
         /*Toolbar configuration and back button start */
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
         myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         myToolbar.setNavigationIcon(R.drawable.iconbackarrowcustom);
         setSupportActionBar(myToolbar);
@@ -60,14 +60,17 @@ public class MyServiceRequests extends AppCompatActivity {
         loadServiceRequests();
     }
 
-
+    /*
+     * Load all the service requests created ny the logged in user.
+     * @params: none
+     * */
     private void loadServiceRequests() {
 
         db = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         db.collection("Service Requests")
 //                .whereIn("Status", Arrays.asList("Pending", "In Progress"))
-                .whereEqualTo("created_By",created_By)
+                .whereEqualTo("created_By", created_By)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -75,26 +78,14 @@ public class MyServiceRequests extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("sanjay", document.getId() + " => " + document.getData());
-//                                System.out.println("Hello" + document.getId() + " => " + document.getData());
-                                String roomNumber = "Room " + (String) document.getData().get("Room Number");// + " - " + document.getData().get("Request Type");
+                                String roomNumber = "Room " + document.getData().get("Room Number");// + " - " + document.getData().get("Request Type");
                                 String description = (String) document.getData().get("Issue Description");
                                 String status = (String) document.getData().get("Status");
                                 String userEmail = (String) document.getData().get("UserEmail");
                                 String docuId = document.getId();
 
-//                                final StorageReference profileRef=storageReference.child("Users/"+docuId+"profile.jpg");
-//                                profileRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Uri> task) {
-//                                        if (task.isSuccessful())
-//                                      url = task.getResult();
-//                                    }
-//                                });
-
-                                System.out.println("Sanjay Image url " + url);
                                 ServiceReqlist.add(new ViewServiceReqmodel(roomNumber, description, url, status, userEmail, docuId));
                                 setreqItemRecycler(ServiceReqlist);
-//                                System.out.println("Hello" + document.getId() + " => " + document.getData() + "==> " + ServiceReqlist.toString());
                             }
 
                         } else {
@@ -102,7 +93,7 @@ public class MyServiceRequests extends AppCompatActivity {
                         }
                     }
                 });
- 
+
     }
 
     private void setreqItemRecycler(List<ViewServiceReqmodel> ServiceReqlist) {

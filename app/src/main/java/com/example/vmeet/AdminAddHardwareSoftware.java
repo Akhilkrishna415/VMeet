@@ -70,6 +70,11 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
 
+        /*
+         * Create a new hardware or a software in to the Equipment table in Firestore DB.
+         * get the title , version and Request Type from the xml
+         * @params: none
+         * */
         btnaddHwSw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +83,7 @@ public class AdminAddHardwareSoftware extends AppCompatActivity {
                 titleOfNewHWSW = hwswtitle.getText().toString();
                 HWSWVersionValue = versionVal.getText().toString();
                 String text = spinner.getSelectedItem().toString();
-                String dbTable="";
+                String dbTable = "";
                 isActive = active.isChecked();
                 if (titleOfNewHWSW.isEmpty() && HWSWVersionValue.isEmpty()) {
                     Toast.makeText(AdminAddHardwareSoftware.this, "Fields are Empty!", Toast.LENGTH_SHORT).show();

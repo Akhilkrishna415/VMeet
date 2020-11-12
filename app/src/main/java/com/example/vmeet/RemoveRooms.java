@@ -47,6 +47,10 @@ public class RemoveRooms extends AppCompatActivity {
 
     }
 
+    /*
+     * Load all the hardware and software items created with in the Equipment table in Firestore
+     * @params: none
+     * */
     private void loadhardwareSoftware() {
         db = FirebaseFirestore.getInstance();
         db.collection("Rooms").orderBy("Room Type")
