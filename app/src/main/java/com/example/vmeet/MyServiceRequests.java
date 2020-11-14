@@ -26,6 +26,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class is to display the service requests made by the user in this layout
+ */
 public class MyServiceRequests extends AppCompatActivity {
 
     final List<ViewServiceReqmodel> ServiceReqlist = new ArrayList<>();
@@ -110,6 +113,12 @@ public class MyServiceRequests extends AppCompatActivity {
         reqItemRecycler.setAdapter(serviceReqAdapter);
     }
 
+    /**
+     * this method used to enable the back button
+     *
+     * @param item : menu item object
+     * @return : it return to the previous activity
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

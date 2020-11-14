@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public abstract class  ViewServiceReqAdapter extends RecyclerView.Adapter<ViewServiceReqAdapter.serviceViewHolder> {
+/**
+ * this adapter class is used get the information from the service requests from the user and pass information to the layout
+ */
+
+public abstract class ViewServiceReqAdapter extends RecyclerView.Adapter<ViewServiceReqAdapter.serviceViewHolder> {
     Context context;
     List<ViewServiceReqmodel> ServiceReqlist;
 
@@ -52,7 +56,7 @@ public abstract class  ViewServiceReqAdapter extends RecyclerView.Adapter<ViewSe
 //            public void onClick(View v) {
 //                Intent i = new Intent(context, MyServiceRequests.class);
 //
-               ;
+        ;
 //
 //                i.putExtras(b);
 //                context.startActivity(i);
@@ -69,7 +73,7 @@ public abstract class  ViewServiceReqAdapter extends RecyclerView.Adapter<ViewSe
 //    public class requestViewHolder extends RecyclerView.ViewHolder {
 
 //        TextView Tvtitle, TvDesc,statusprogress;
-       // ImageView IvReq;
+    // ImageView IvReq;
 
 //        public requestViewHolder(@NonNull View itemView) {
 //            super(itemView);
@@ -90,7 +94,7 @@ public abstract class  ViewServiceReqAdapter extends RecyclerView.Adapter<ViewSe
             super(view);
             Tvtitle = itemView.findViewById(R.id.RoomNumber);
             TvDesc = itemView.findViewById(R.id.ReqDesc);
-          statusprogress = itemView.findViewById(R.id.statusprogress);
+            statusprogress = itemView.findViewById(R.id.statusprogress);
         }
     }
 }

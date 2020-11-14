@@ -13,16 +13,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
-public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqAdapter.requestViewHolder> {
+/**
+ * ServiceReqAdapter class is used to load list of items at ServiceReqStatus page
+ */
+public abstract class ServiceReqAdapter extends RecyclerView.Adapter<ServiceReqAdapter.requestViewHolder> {
     Context context;
     List<ServiceReqModel> ServiceReqlist;
 
+    /**
+     * to get the data into this activity
+     *
+     * @param context        : it refers the context
+     * @param ServiceReqlist : it refers the serviceReq model
+     */
     public ServiceReqAdapter(Context context, List<ServiceReqModel> ServiceReqlist) {
         this.context = context;
         this.ServiceReqlist = ServiceReqlist;
     }
 
+    /**
+     * this is to inflate the layout
+     *
+     * @param parent   : ViewGroup object
+     * @param viewType : it refers current position
+     * @return : it returns viewHolder object
+     */
     @NonNull
     @Override
     public ServiceReqAdapter.requestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +45,12 @@ public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReq
         return new ServiceReqAdapter.requestViewHolder(view);
     }
 
+    /**
+     * it is to set the data into the adapter layout
+     *
+     * @param holder   : adapters viewholder object
+     * @param position : it refers current position
+     */
     @Override
     public void onBindViewHolder(@NonNull ServiceReqAdapter.requestViewHolder holder, final int position) {
         holder.Tvtitle.setText(ServiceReqlist.get(position).getRoomNumber());
@@ -50,7 +71,7 @@ public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReq
                 b.putString("Description", description);
                 b.putString("Status", status);
                 b.putString("User Email", useremail);
-                b.putString("documentID",ServiceReqlist.get(position).getDocuId());
+                b.putString("documentID", ServiceReqlist.get(position).getDocuId());
 
                 i.putExtras(b);
                 context.startActivity(i);
@@ -60,13 +81,18 @@ public abstract class  ServiceReqAdapter extends RecyclerView.Adapter<ServiceReq
         });
     }
 
+    /**
+     * get the item count
+     *
+     * @return : it returns the size of the serviceReq list
+     */
     public int getItemCount() {
         return ServiceReqlist.size();
     }
 
     public class requestViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Tvtitle, TvDesc,statusprogress;
+        TextView Tvtitle, TvDesc, statusprogress;
         ImageView IvReq;
 
         public requestViewHolder(@NonNull View itemView) {

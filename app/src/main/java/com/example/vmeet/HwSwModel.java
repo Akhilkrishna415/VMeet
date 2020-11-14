@@ -1,5 +1,9 @@
 package com.example.vmeet;
 
+/**
+ * this model class is used pass and get the information for the HW/SW class
+ */
+
 public class HwSwModel {
     private String title;
     private String version;
@@ -26,6 +30,7 @@ public class HwSwModel {
     public void setDocumentID(String documentID) {
         this.documentID = documentID;
     }
+
     public String getTitle() {
         return title;
     }

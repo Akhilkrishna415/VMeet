@@ -14,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.ViewHolder> {
+/**
+ * MyBookingAdapter class is used to load list of items at MyBooking page
+ */
+
+public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.ViewHolder> {
 /*
     String[] mTitle = {};
     String[] mRoom = {};
@@ -26,13 +30,24 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
     List<MyBookingModel> recycleModels;
     private LayoutInflater layoutInflater;
 
-
-    public MyBookingAdapter(Context context,List<MyBookingModel> model)
-    {
+    /**
+     * to get the data  into this activity
+     *
+     * @param context : it shows the context
+     * @param model   : it refers the model page
+     */
+    public MyBookingAdapter(Context context, List<MyBookingModel> model) {
         this.context = context;
         this.recycleModels = model;
     }
 
+    /**
+     * this is to inflate the layout
+     *
+     * @param parent   : ViewGroup object
+     * @param viewType : it refers current position
+     * @return : it returns viewHolder object
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,11 +58,16 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
 
         View view = LayoutInflater.from(context).inflate(R.layout.mybooking_model, parent, false);
         return new MyBookingAdapter.ViewHolder(view);
-
     }
 
+    /**
+     * it is to set the data into the adapter layout
+     *
+     * @param holder   : adapters viewholder object
+     * @param position : it refers current position
+     */
     @Override
-    public void onBindViewHolder(@NonNull MyBookingAdapter.ViewHolder holder,final int position) {
+    public void onBindViewHolder(@NonNull MyBookingAdapter.ViewHolder holder, final int position) {
 
         holder.Title.setText(recycleModels.get(position).getTitle());
         holder.roomNum.setText(recycleModels.get(position).getRoom());
@@ -79,11 +99,19 @@ public class MyBookingAdapter  extends RecyclerView.Adapter<MyBookingAdapter.Vie
         });
     }
 
+    /**
+     * get the itemCount
+     *
+     * @return : it returns size of the items
+     */
     @Override
     public int getItemCount() {
         return recycleModels.size();
     }
 
+    /**
+     * this class is used to hold the recycler view
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView Title, roomNum;
         TextView date;

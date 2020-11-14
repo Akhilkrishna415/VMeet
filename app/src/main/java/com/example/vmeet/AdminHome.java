@@ -11,6 +11,9 @@ import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * this class is the admin homepage
+ */
 public class AdminHome extends AppCompatActivity {
 
     CardView remvHwSw, remvRooms, addRooms, addHwSw, viewRequests;
@@ -69,6 +72,12 @@ public class AdminHome extends AppCompatActivity {
 
     }
 
+    /**
+     * this method is used for the user to go back to the login class when he presses the back button
+     *
+     * @param item
+     * @return
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

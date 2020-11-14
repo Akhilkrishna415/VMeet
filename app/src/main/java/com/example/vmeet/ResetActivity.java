@@ -16,11 +16,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * this class is used to change the password if the user forgets the password
+ */
+
 public class ResetActivity extends AppCompatActivity implements View.OnClickListener {
     TextView Login;
     Button btnsubmit;
     FirebaseAuth mAuth;
-   // Toolbar toolbar;
+    // Toolbar toolbar;
     EditText userEmail;
 
     @Override
@@ -29,12 +33,12 @@ public class ResetActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_reset);
 
 
-     //  toolbar = findViewById(R.id.toolbar);
+        //  toolbar = findViewById(R.id.toolbar);
 
         userEmail=findViewById(R.id.username);
         btnsubmit=findViewById(R.id.btnsubmit);
 
-     //  toolbar.setTitle("ForgetPassword");
+        //  toolbar.setTitle("ForgetPassword");
         mAuth = FirebaseAuth.getInstance();
 
         btnsubmit=findViewById(R.id.btnsubmit);

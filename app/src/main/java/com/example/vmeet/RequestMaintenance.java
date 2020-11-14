@@ -24,6 +24,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class is used for user to make new request maintenance
+ */
+
 public class RequestMaintenance extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final String TAG = "TAG";
     Button btnSubmit;
@@ -52,6 +56,10 @@ public class RequestMaintenance extends AppCompatActivity implements AdapterView
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*Toolbar configuration and back button End */
+
+        /**
+         * this onclick method is used to store all the information in the database when the user clicks the submit button
+         */
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

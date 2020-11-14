@@ -1,7 +1,6 @@
 package com.example.vmeet;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vmeet.ui.home.HomeFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+/**
+ * this adapter class is used to display the details of the meetings booked by the user in the cardmodel layout
+ */
 
 public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     Context context;
@@ -23,8 +25,8 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     //String [] mRoom ={};
     //String[] mTime = {};
     private LayoutInflater layoutInflater;
-    public AppAdapter(List<RecycleModel> model)
-    {
+
+    public AppAdapter(List<RecycleModel> model) {
        /* mTitle = _data;
         mTime = _data2;
         mRoom = _data3;
@@ -33,6 +35,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         this.recycleModels = model;
 
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,20 +67,20 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         }
 
 
-
     }
+
 
     @Override
     public int getItemCount() {
         return recycleModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView Img;
         TextView Title;
         TextView Time;
         TextView Room;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Img = itemView.findViewById(R.id.ImagePreview);

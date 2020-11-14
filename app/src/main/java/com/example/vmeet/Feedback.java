@@ -1,9 +1,5 @@
 package com.example.vmeet;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +10,10 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,10 +23,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class is used to collect feedback from the user
+ */
+
 public class Feedback extends AppCompatActivity {
 
     public static final String TAG = "TAG";
-    Button btnfeedback,btnratenow;
+    Button btnfeedback, btnratenow;
     EditText et_feedback;
     RatingBar et_rating;
     FirebaseAuth mFirebaseAuth;
@@ -54,13 +58,14 @@ public class Feedback extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*Toolbar configuration and back button End */
 
-
-
+        /**
+         * this method is used to store the star rating and user feedback in the database
+         */
 
         btnfeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Float value =et_rating.getRating();
+                Float value = et_rating.getRating();
                 final String feedback = et_feedback.getText().toString();
                 String username = mFirebaseAuth.getCurrentUser().getDisplayName();
                 String userEmail = mFirebaseAuth.getCurrentUser().getEmail();
@@ -96,7 +101,7 @@ public class Feedback extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
+                // app icon in action bar clicked; go to settings page
                 Intent intent = new Intent(this, Settings.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

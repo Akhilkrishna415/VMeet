@@ -25,6 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class is used to add admin new HW/SW for the application
+ */
+
 public class AdminAddHardwareSoftware extends AppCompatActivity {
 
     public static final String TAG = "TAG";

@@ -33,6 +33,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * this fragment class is the sub activity of the homepage used to display all the information in the homepage
+ */
+
 public class HomeFragment extends Fragment {
 
     final List<RecycleModel> RecycleList = new ArrayList<>();
@@ -92,6 +96,8 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    //displays the current user name and current date in the homepage
+
     private void setHeaderInfo() {
 
 
@@ -111,6 +117,8 @@ public class HomeFragment extends Fragment {
 
 
     }
+
+    //displays the new booking request details in the homepage
 
     private void loadInformation() {
         db.collection("NewRoomRequest")

@@ -2,6 +2,10 @@ package com.example.vmeet;
 
 import android.net.Uri;
 
+/**
+ * this model class is used to get and set the details of the service requests made by the user
+ */
+
 public class ViewServiceReqmodel {
 
     private String RoomNumber;
@@ -10,6 +14,17 @@ public class ViewServiceReqmodel {
     private String userEmail;
     private String docuId;
     private Uri url;
+
+    /**
+     * this constructor is used intialize the below objects
+     *
+     * @param title
+     * @param description
+     * @param url
+     * @param status
+     * @param userEmail
+     * @param docuId
+     */
 
     public ViewServiceReqmodel(String title, String description, Uri url, String status, String userEmail, String docuId) {
         this.RoomNumber = title;

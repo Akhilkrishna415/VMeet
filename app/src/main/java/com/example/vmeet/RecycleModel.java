@@ -1,5 +1,9 @@
 package com.example.vmeet;
 
+/**
+ * this model class is used get and set the details of the user booking details
+ */
+
 public class RecycleModel {
 
     private String Title;
@@ -41,8 +45,7 @@ public class RecycleModel {
     }
 
 
-    public RecycleModel(String title,String time, String room,String imageURL)
-    {
+    public RecycleModel(String title,String time, String room,String imageURL) {
         this.Title = title;
         this.Room = room;
         this.time = time;

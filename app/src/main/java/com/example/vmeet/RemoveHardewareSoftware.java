@@ -20,6 +20,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class is used for admin to remove HW/SW from the application
+ */
+
 public class RemoveHardewareSoftware extends AppCompatActivity {
     final List<HwSwModel> hwSwList = new ArrayList<>();
     RecyclerView prodItemRecycler;
@@ -45,6 +49,10 @@ public class RemoveHardewareSoftware extends AppCompatActivity {
         prodItemRecycler = findViewById(R.id.product_recycler);
         loadhardwareSoftware();
     }
+
+    /**
+     * this class is used to load the all HW/SW that are existed in the appliction
+     */
 
     private void loadhardwareSoftware() {
         db = FirebaseFirestore.getInstance();

@@ -23,6 +23,10 @@ import java.util.List;
 
 import static com.example.vmeet.Login.TAG;
 
+/**
+ * this adapter class is used get the existing rooms details from recycler view
+ */
+
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewHolder> {
     Context context;
     List<RoomsModel> hwswList;
@@ -80,6 +84,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ProductViewH
                         }
                     }
                 };
+
+                /**
+                 * this is used to prompt the alert dialog when the user clicks the delete image button in the page
+                 */
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure you want to delete this room?").setPositiveButton("Yes", dialogClickListener)

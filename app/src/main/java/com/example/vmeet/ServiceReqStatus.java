@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * using this class, admin can update the status of the service requests made by the user
+ */
 public class ServiceReqStatus extends AppCompatActivity {
 
     Button btnupdate;
@@ -34,7 +37,13 @@ public class ServiceReqStatus extends AppCompatActivity {
     private FirebaseUser curUser;
     private FirebaseAuth auth;
     String[] progress = new String[]{"Pending", "In Progress", "Completed"};
+
     @Override
+
+    /**
+     * this method is the main which triggers when you called this activity
+     * @param savedInstanceState : bundle object
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_req_status);
@@ -64,7 +73,6 @@ public class ServiceReqStatus extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinStatus.setAdapter(adapter);
 //        spinStatus.setOnItemSelectedListener(this);
-
 
 
         db = FirebaseFirestore.getInstance();
@@ -128,7 +136,12 @@ public class ServiceReqStatus extends AppCompatActivity {
 
     }
 
-
+    /**
+     * this method used to enable the back button
+     *
+     * @param item : menu item object
+     * @return : it return to the previous activity
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

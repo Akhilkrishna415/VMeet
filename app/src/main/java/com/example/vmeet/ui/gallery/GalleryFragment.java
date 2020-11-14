@@ -14,6 +14,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.vmeet.R;
 
+/**
+ * this fragment class is the sub activity of the homepage class
+ */
+
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;

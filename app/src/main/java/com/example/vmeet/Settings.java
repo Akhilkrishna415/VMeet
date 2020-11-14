@@ -1,14 +1,17 @@
 package com.example.vmeet;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+/**
+ * user can edit his personal settings, read faqs, give feedback using this class
+ */
 public class Settings extends AppCompatActivity {
 
     TextView tv_profilesettings;
@@ -16,6 +19,11 @@ public class Settings extends AppCompatActivity {
     TextView tv_faqs;
     TextView tv_feedback;
 
+    /**
+     * this method is the main which triggers when you called this activity
+     *
+     * @param savedInstanceState : bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +76,6 @@ public class Settings extends AppCompatActivity {
 
             }
         });
-
 
 
     }

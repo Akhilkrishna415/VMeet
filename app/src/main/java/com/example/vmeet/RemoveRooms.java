@@ -20,6 +20,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class is used for admin to remove rooms from the application
+ */
+
 public class RemoveRooms extends AppCompatActivity {
     final List<RoomsModel> roomList = new ArrayList<>();
 

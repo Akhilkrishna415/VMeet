@@ -31,9 +31,13 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class is used to update the user details in the profile section
+ */
+
 public class Editprofile extends AppCompatActivity {
-    Button btn_save,btn_cancel;
-    EditText Ep_email,Ep_phone,Ep_dept,Ep_staffid,Ep_designation;
+    Button btn_save, btn_cancel;
+    EditText Ep_email, Ep_phone, Ep_dept, Ep_staffid, Ep_designation;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser user;
@@ -70,16 +74,20 @@ public class Editprofile extends AppCompatActivity {
         Ep_staffid.setText(data.getStringExtra("staffid"));
         Ep_designation.setText(data.getStringExtra("designation"));
 
-        fAuth=FirebaseAuth.getInstance();
-        fStore=FirebaseFirestore.getInstance();
-        user=fAuth.getCurrentUser();
-        storageReference= FirebaseStorage.getInstance().getReference();
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        user = fAuth.getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
 
-        btn_save=findViewById(R.id.btn_save);
-        btn_cancel=findViewById(R.id.btn_cancel);
+        btn_save = findViewById(R.id.btn_save);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
-        StorageReference profileRef=storageReference.child("Users/"+fAuth.getCurrentUser().getUid()+"profile.jpg");
+        /**
+         * this method is used to determine storage reference in the firebase database for the profile image
+         */
+
+        StorageReference profileRef = storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -87,14 +95,21 @@ public class Editprofile extends AppCompatActivity {
             }
         });
 
+        /**
+         * this method is used to select image from the gallery for the profile picture
+         */
+
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent opengalleryintent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(opengalleryintent,1000);
+                startActivityForResult(opengalleryintent, 1000);
             }
         });
 
+        /**
+         * this method is used to display all the profile details from profile page and able to edit those details and upload in database
+         */
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,8 +169,8 @@ public class Editprofile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1000){
-            if(resultCode == Activity.RESULT_OK && data != null && data.getData()!=null){
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
                 Uri imageuri = data.getData();
                 profileImageView.setImageURI(imageuri);
 
@@ -164,9 +179,15 @@ public class Editprofile extends AppCompatActivity {
         }
     }
 
+    /**
+     * this method is used to upload the selected image to the database
+     *
+     * @param imageUri
+     */
+
     private void uploadImagetoFirebase(Uri imageUri) {
         //upload image to firebase storage
-        final StorageReference fileref=storageReference.child("Users/"+fAuth.getCurrentUser().getUid()+"profile.jpg");
+        final StorageReference fileref = storageReference.child("Users/" + fAuth.getCurrentUser().getUid() + "profile.jpg");
         fileref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -191,7 +212,7 @@ public class Editprofile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
+                // app icon in action bar clicked; go profile settings page
                 Intent intent = new Intent(this, Profile_settings.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -201,4 +222,4 @@ public class Editprofile extends AppCompatActivity {
         }
     }
 
-    }
+}

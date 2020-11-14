@@ -39,6 +39,11 @@ public class SignUp extends AppCompatActivity {
     FirebaseFirestore fstore;
     String userID;
 
+    /**
+     * this method is the main which triggers when you called this activity
+     *
+     * @param savedInstanceState : bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +129,10 @@ public class SignUp extends AppCompatActivity {
                 }
             }
         });
+
+        /**
+         * it redirects to the login activity if the user is an existing user
+         */
         userExist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

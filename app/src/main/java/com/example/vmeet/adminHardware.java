@@ -33,6 +33,10 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class is used to add admin additional rooms to the application
+ */
+
 public class adminHardware extends AppCompatActivity {
 
     public static final String TAG = "TAG";

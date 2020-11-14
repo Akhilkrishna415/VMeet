@@ -13,11 +13,24 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * this class uses async task to send email confirmation to the user when the booking request is made
+ */
+
 public class GMailSender extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Session session;
     private String email, subject, message;
+
+    /**
+     * this constructor is used to intialize the below objects
+     *
+     * @param context
+     * @param email
+     * @param subject
+     * @param message
+     */
 
     public GMailSender(Context context, String email, String subject, String message) {
         this.context = context;

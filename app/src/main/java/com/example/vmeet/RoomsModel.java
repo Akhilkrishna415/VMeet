@@ -1,5 +1,9 @@
 package com.example.vmeet;
 
+/**
+ * this model class is used get and set the existed rooms information for the admin
+ */
+
 public class RoomsModel {
     private String floor;
     private String room_type;
@@ -7,6 +11,8 @@ public class RoomsModel {
     private String documentID;
 
     /**
+     * this constructor is used to initialize the below objects
+     *
      * @param floor
      * @param room_type
      * @param room_number

@@ -1,9 +1,5 @@
 package com.example.vmeet;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +8,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import static com.example.vmeet.Login.TAG;
+
+/**
+ * this class is used to display the booking details of the user and helps to cancel the booking
+ */
 
 public class BookingDetails extends AppCompatActivity {
 
@@ -63,7 +66,9 @@ public class BookingDetails extends AppCompatActivity {
         SoftWare = findViewById(R.id.ShowSoftwares);
         Comments = findViewById(R.id.ShowComments);
         //ImgUrl = findViewById(R.id.ShowImage);
-
+       /*
+       to initialize the firebase instance
+        */
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         final Bundle b = getIntent().getExtras();
@@ -110,6 +115,10 @@ public class BookingDetails extends AppCompatActivity {
         }
     }
 
+    /*
+     * this helps user to view about his booking request
+     * It allows him to cancel the booking request he made
+     */
     public void Cancel(View view) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -126,7 +135,7 @@ public class BookingDetails extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Intent intent = new Intent(getApplicationContext(), MyBooking.class);
-                                        Toast.makeText(getApplicationContext(), "Booking has been canceled successfully.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Booking has been cancelled successfully.", Toast.LENGTH_SHORT).show();
                                         startActivity(intent);
 
                                     }
@@ -146,6 +155,9 @@ public class BookingDetails extends AppCompatActivity {
                 }
             }
         };
+        /*
+         * It gives an alert to the user  while cancelling the booking request whether to cancel ot not
+         */
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to cancel this booking?").setPositiveButton("Yes", dialogClickListener)

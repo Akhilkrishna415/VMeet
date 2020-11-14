@@ -38,6 +38,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+/**
+ * this class is used give the functionalities for all the features that are in home page
+ */
+
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
@@ -58,7 +62,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
-
+        /**
+         * creating intent for the floating action button
+         */
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,10 +128,21 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
 
+    /**
+     * this method is used give intents for all the buttons that are in the navigation menu in the home page
+     */
+
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setCheckable(true);
         int id = item.getItemId();
         switch (id) {
+
+            case R.id.nav_home:
+                drawer.close();
+                drawer.animate();
+                startActivity(new Intent(Homepage.this, Homepage.class));
+                break;
+
             case R.id.menu2settings:
                 drawer.close();
                 drawer.animate();
@@ -181,20 +198,20 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         try {
             StorageReference profileRef = storageReference.child("Users/" + mAuth.getCurrentUser().getUid() + "profile.jpg");
 //            System.out.println("sanjay" + profileRef.toString());
-                profileRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        if (exception instanceof StorageException &&
-                                ((StorageException) exception).getErrorCode() == StorageException.ERROR_OBJECT_NOT_FOUND) {
-                            Log.d("EXCEPTION", "Profile photo does not exist");
-                        }
+            profileRef.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    if (exception instanceof StorageException &&
+                            ((StorageException) exception).getErrorCode() == StorageException.ERROR_OBJECT_NOT_FOUND) {
+                        Log.d("EXCEPTION", "Profile photo does not exist");
                     }
-                }).addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(profileImg);
-                    }
-                });
+                }
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).into(profileImg);
+                }
+            });
         } catch (Exception e) {
             Log.v("EXCEPTION : ", e.getMessage());
         }

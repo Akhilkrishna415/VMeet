@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * this class is to store the service requests made by the user into the database
+ */
 public class ReceiveServiceRequests extends AppCompatActivity {
     final List<ServiceReqModel> ServiceReqlist = new ArrayList<>();
     RecyclerView reqItemRecycler;
@@ -33,6 +36,11 @@ public class ReceiveServiceRequests extends AppCompatActivity {
     Uri url;
     StorageReference storageReference;
 
+    /**
+     * this method is the main which triggers when you called this activity
+     *
+     * @param savedInstanceState : bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +108,9 @@ public class ReceiveServiceRequests extends AppCompatActivity {
 
     }
 
+    /**
+     * @param ServiceReqlist : refers the serviceReq model
+     */
     private void setreqItemRecycler(List<ServiceReqModel> ServiceReqlist) {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -114,6 +125,12 @@ public class ReceiveServiceRequests extends AppCompatActivity {
         reqItemRecycler.setAdapter(reqServiceAdapter);
     }
 
+    /**
+     * it helps user to go back to the
+     *
+     * @param item : refers menuitem
+     * @return : return item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

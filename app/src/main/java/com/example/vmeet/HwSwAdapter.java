@@ -23,11 +23,21 @@ import java.util.List;
 
 import static com.example.vmeet.Login.TAG;
 
+/**
+ * this adapter class is used to bind the information for remove HW/SW class
+ */
+
 public class HwSwAdapter extends RecyclerView.Adapter<HwSwAdapter.ProductViewHolder> {
     Context context;
     List<HwSwModel> hwswList;
     FirebaseFirestore db;
 
+    /**
+     * this constructor is used intialize the the HW/SW adapter objects
+     *
+     * @param context
+     * @param hwswList
+     */
 
     public HwSwAdapter(Context context, List<HwSwModel> hwswList) {
         this.context = context;
@@ -83,6 +93,10 @@ public class HwSwAdapter extends RecyclerView.Adapter<HwSwAdapter.ProductViewHol
                         }
                     }
                 };
+
+                /**
+                 * this is used to prompt the alert dialog box when you click the delete image button in the page
+                 */
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure you want to delete this equipment?").setPositiveButton("Yes", dialogClickListener)

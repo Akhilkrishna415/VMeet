@@ -62,7 +62,7 @@ public class Contactus extends AppCompatActivity {
         Mail.putExtra(Intent.EXTRA_EMAIL, recipients);
         Mail.putExtra(Intent.EXTRA_SUBJECT, "Subject text here...");
         Mail.putExtra(Intent.EXTRA_TEXT, "Body of the content here...");
-        Mail.putExtra(Intent.EXTRA_CC, "secondcupcafemontreal@gmail.com");
+        Mail.putExtra(Intent.EXTRA_CC, "vmeetadmin@gmail.com");
         Mail.setType("text/html");
         Mail.setPackage("com.google.android.gm");
         startActivity(Intent.createChooser(Mail, "Send mail"));

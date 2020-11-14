@@ -2,17 +2,14 @@ package com.example.vmeet;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -52,6 +49,10 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.google.firebase.firestore.FieldValue.serverTimestamp;
+
+/**
+ * this class is used to make a new booking request for the user
+ */
 
 public class CreatePostActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -112,6 +113,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
 
         showRooms();
         showUserInfo();
+        /*
+        user can pick a date by using the calender image
+         */
 
         ImageView calender = (ImageView) findViewById(R.id.calander);
         calender.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +127,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
 
 
-        //Display available software from the database to dialogue builder
+        /*
+         It displays the available software from the database to the user while booking a room
+         */
         btnSoftware = (Button) findViewById(R.id.btnsoftware);
         software = (TextView) findViewById(R.id.software);
         final ArrayList<String> arrSoftware = new ArrayList<String>();
@@ -146,7 +152,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                     }
                 });
 
-
+          /*
+          here user can choose his required software from the list provided
+           */
         btnSoftware.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,7 +208,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
 
 
-        //Display available Hardware from the database to dialogue builder
+       /*
+         It displays the available hardware from the database to the user while booking a room
+         */
 
         btnHardware = (Button) findViewById(R.id.btnHardware);
         txtHardware = (TextView) findViewById(R.id.txthardware);
@@ -224,7 +234,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
                     }
                 });
 
-
+         /*
+          here user can choose his required hardware from the list provided
+           */
         btnHardware.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,9 +290,9 @@ public class CreatePostActivity extends AppCompatActivity implements DatePickerD
         });
 
 
-        /*
+        /**
          * Submit button: on submit send data to firestore New Room Request functionality
-         * */
+         */
         btnsubmit = (Button) findViewById(R.id.btnsubmit);
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override

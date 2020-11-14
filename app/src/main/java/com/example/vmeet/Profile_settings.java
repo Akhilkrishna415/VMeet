@@ -25,9 +25,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+/**
+ * this class to edit the profile settings
+ */
 public class Profile_settings extends AppCompatActivity {
     Button btn_editprofile;
-    TextView email,phonenumber,staffid,dept,designation;
+    TextView email, phonenumber, staffid, dept, designation;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
@@ -35,7 +38,11 @@ public class Profile_settings extends AppCompatActivity {
     StorageReference storageReference;
 
 
-
+    /**
+     * this method is the main which triggers when you called this activity
+     *
+     * @param savedInstanceState : bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,21 +100,26 @@ public class Profile_settings extends AppCompatActivity {
         });
 
 
-
         btn_editprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(),Editprofile.class);
-                i.putExtra("email",email.getText().toString());
-                i.putExtra("phonenumber",phonenumber.getText().toString());
-                i.putExtra("staffid",staffid.getText().toString());
-                i.putExtra("dept",dept.getText().toString());
-                i.putExtra("designation",designation.getText().toString());
+                i.putExtra("email", email.getText().toString());
+                i.putExtra("phonenumber", phonenumber.getText().toString());
+                i.putExtra("staffid", staffid.getText().toString());
+                i.putExtra("dept", dept.getText().toString());
+                i.putExtra("designation", designation.getText().toString());
                 startActivity(i);
             }
         });
     }
 
+    /**
+     * it takes user to the previous page
+     *
+     * @param item : refers the menu item
+     * @return : returns selected item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
